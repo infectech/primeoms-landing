@@ -1,0 +1,9 @@
+# Rendered promo videos stay on the local machine
+*.mp4
+
+# Regenerable render output (frames, audio, intermediate video)
+promo/build/
+promo/genz/build/
+
+# Python cache
+__pycache__/

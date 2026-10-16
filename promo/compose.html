@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>PrimeOMS promo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=block">
+  <link rel="stylesheet" href="compose.css">
+</head>
+<body>
+<div id="sprite"></div>
+
+<div id="stage">
+
+  <!-- 1 · Intro: the noise -->
+  <section class="scene" id="s-intro">
+    <div class="noise abs" data-noise style="left:230px;top:190px"><svg class="avc" viewBox="20 12 80 80"><use href="#av-sadia" width="120" height="120"/></svg>Is the Oxford shirt available in M?</div>
+    <div class="noise abs" data-noise style="left:1190px;top:150px"><span class="tagx">bKash</span>Did this one pay?</div>
+    <div class="noise abs" data-noise style="left:700px;top:500px"><span class="tagx">017XX-XXX421</span><span class="warn">Real customer?</span></div>
+    <div class="noise abs" data-noise style="left:240px;top:780px"><span class="tagx">OXF-12-L</span>3 left… or 0?</div>
+    <div class="noise abs" data-noise style="left:1170px;top:790px"><span class="tagx">3 portals</span>Pathao · Steadfast · Carrybee</div>
+    <h1 class="h1 intro-q abs" data-introq>What if it was all <span class="calm">calm</span>?</h1>
+  </section>
+
+  <!-- 2 · Logo -->
+  <section class="scene" id="s-logo">
+    <span class="bubbleshape abs" data-float style="left:-120px;top:-160px;width:620px;height:620px"></span>
+    <span class="bubbleshape abs" data-float style="left:1480px;top:640px;width:560px;height:560px"></span>
+    <span class="bubbleshape abs" data-float style="left:1560px;top:90px;width:180px;height:180px"></span>
+    <span class="bubbleshape abs" data-float style="left:180px;top:820px;width:120px;height:120px"></span>
+    <div class="logo-lock abs">
+      <img class="logo-mark" data-logomark src="../assets/primeoms-logo.png" alt="">
+      <div class="wordmark" data-wordmark><span>P</span><span>r</span><span>i</span><span>m</span><span>e</span><span class="oms">O</span><span class="oms">M</span><span class="oms">S</span></div>
+      <div class="tagline">
+        <span class="word" data-tag1>Every order.</span><br>
+        <span class="word l2" data-tag2>One calm place.<svg class="underline" viewBox="0 0 300 14" preserveAspectRatio="none"><path data-underline d="M2 9c40-6 80-7 120-3s90 5 176-4" fill="none" stroke="#6fcaa8" stroke-width="4" stroke-linecap="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/></svg></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 · The crew -->
+  <section class="scene" id="s-crew">
+    <div class="crew-title abs"><p class="h2" data-crewt1>Your whole team.</p><p class="h2 blue" data-crewt2>One board.</p></div>
+    <div class="crew-row abs">
+      <div class="member" data-member><div style="position:relative"><svg class="avc" viewBox="20 12 80 80"><use href="#av-nabila" width="120" height="120"/></svg><span class="dot" style="right:12px;bottom:12px"></span></div><b>Nabila</b><small>Moderator</small></div>
+      <div class="member" data-member><div style="position:relative"><svg class="avc" viewBox="20 12 80 80"><use href="#av-tanvir" width="120" height="120"/></svg><span class="dot" style="right:12px;bottom:12px"></span></div><b>Tanvir</b><small>Store owner</small></div>
+      <div class="member" data-member><div style="position:relative"><svg class="avc" viewBox="20 12 80 80"><use href="#av-ayesha" width="120" height="120"/></svg><span class="dot" style="right:12px;bottom:12px"></span></div><b>Ayesha</b><small>Operations</small></div>
+      <div class="member" data-member><div style="position:relative"><svg class="avc" viewBox="20 12 80 80"><use href="#av-rafi" width="120" height="120"/></svg><span class="dot" style="right:12px;bottom:12px"></span></div><b>Rafi</b><small>Moderator</small></div>
+    </div>
+  </section>
+
+  <!-- 4 · Orders board -->
+  <section class="scene on-dark" id="s-orders">
+    <div class="side-title abs" data-otitle style="top:300px">
+      <p class="eyebrow">Orders</p>
+      <p class="h2" style="margin-top:14px">Every order.<br><span style="color:#7cc8ff">One board.</span></p>
+      <p class="lead">From New to Delivered — each card carries the teammate who made it.</p>
+    </div>
+    <div class="board abs" data-board><div class="board-cols" data-cols></div></div>
+  </section>
+
+  <!-- 5 · Fraud Check -->
+  <section class="scene" id="s-fraud">
+    <div class="side-title abs" data-ftitle>
+      <p class="eyebrow">Fraud Check</p>
+      <p class="h2" style="margin-top:14px">Know before<br>you ship.</p>
+      <p class="lead">See a customer’s courier delivery history before you confirm.</p>
+    </div>
+    <div class="fwin abs shadow" data-fwin>
+      <div class="bar"><i></i><i></i><i></i></div>
+      <div class="body">
+        <p class="t">Fraud Check</p>
+        <p class="sub">Look up a phone number’s courier delivery history.</p>
+        <div class="fsearch">
+          <div class="finput"><span data-ftext></span><span class="caret" data-caret></span></div>
+          <span class="btn fbtn" data-fbtn>Detect fraud</span>
+        </div>
+        <div class="fresult">
+          <span class="fbeam" data-fbeam></span>
+          <svg class="ring" viewBox="0 0 84 84">
+            <circle class="trk" cx="42" cy="42" r="34"/>
+            <circle class="val" data-fring cx="42" cy="42" r="34" pathLength="100" stroke-dasharray="0 100" transform="rotate(-90 42 42)"/>
+            <text x="42" y="45" font-size="17" font-weight="700" fill="#1d1d1f" data-fpct>0%</text>
+            <text x="42" y="57" font-size="7.5" fill="#7a7a7a">delivered</text>
+          </svg>
+          <div class="fstats">
+            <div><small>Total parcels</small><b data-ftot>0</b></div>
+            <div><small>Delivered</small><b data-fdel>0</b></div>
+            <div><small>Returned</small><b data-fret>0</b></div>
+          </div>
+        </div>
+        <div class="fverdict" data-fverdict><svg class="icon"><use href="#i-check"/></svg>Good delivery record — safe to confirm</div>
+      </div>
+    </div>
+    <div class="cursor" data-fcursor style="--c:#0066cc">
+      <span class="ripple" data-ripple></span>
+      <svg class="arrow" viewBox="0 0 32 32"><path d="M3 3l10 26 3.8-10.8 10.8-3.8z"/></svg>
+      <span class="tag"><svg viewBox="20 12 80 80"><use href="#av-nabila" width="120" height="120"/></svg>Nabila</span>
+    </div>
+  </section>
+
+  <!-- 6 · Couriers route -->
+  <section class="scene on-dark" id="s-route">
+    <div class="route-title abs" data-rtitle>
+      <p class="eyebrow">Couriers &amp; payments</p>
+      <p class="h2" style="margin-top:14px">Pathao. Steadfast. Carrybee. <span style="color:#7cc8ff">Built in.</span></p>
+    </div>
+    <div class="cchips abs">
+      <span class="cchip" data-cchip><svg class="icon"><use href="#i-truck"/></svg>Pathao</span>
+      <span class="cchip" data-cchip><svg class="icon"><use href="#i-truck"/></svg>Steadfast</span>
+      <span class="cchip" data-cchip><svg class="icon"><use href="#i-truck"/></svg>Carrybee</span>
+      <span class="cchip" data-cchip><svg class="icon"><use href="#i-wallet"/></svg>bKash</span>
+    </div>
+    <div class="hook abs" data-hook><span class="live"></span>Webhook · <b data-hookstatus>Packed</b></div>
+    <div class="route abs" data-route>
+      <svg viewBox="0 0 1000 260" preserveAspectRatio="none">
+        <path class="rbase" data-rbase d="M70 180C210 180 230 70 370 80S560 200 690 160 870 60 930 96" vector-effect="non-scaling-stroke"/>
+        <path class="rprog" data-rprog d="M70 180C210 180 230 70 370 80S560 200 690 160 870 60 930 96" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>
+      </svg>
+      <div class="rstop" data-rstop data-at="0" data-label="Packed"><i></i><span>Store · Dhaka</span></div>
+      <div class="rstop" data-rstop data-at="0.3" data-label="Picked up"><i></i><span>Picked up</span></div>
+      <div class="rstop" data-rstop data-at="0.55" data-label="At the sorting hub"><i></i><span>Sorting hub</span></div>
+      <div class="rstop" data-rstop data-at="0.78" data-label="In transit"><i></i><span>In transit</span></div>
+      <div class="rstop" data-rstop data-at="1" data-label="Delivered"><i></i><span>Chattogram</span></div>
+      <div class="rpin" data-rpin="0"><svg class="avc" viewBox="20 12 80 80"><use href="#av-ayesha" width="120" height="120"/></svg>Packed by <b>Ayesha</b></div>
+      <div class="rpin" data-rpin="1"><svg class="avc" viewBox="20 12 80 80"><use href="#av-sadia" width="120" height="120"/></svg><span data-sadia><b>Sadia</b> · waiting</span></div>
+      <div class="truck" data-truck><svg class="icon"><use href="#i-truck"/></svg></div>
+    </div>
+  </section>
+
+  <!-- 7 · Inventory -->
+  <section class="scene" id="s-inv">
+    <div class="side-title abs" data-ititle style="top:300px">
+      <p class="eyebrow">Inventory</p>
+      <p class="h2" style="margin-top:14px">Stock that<br>keeps count.</p>
+      <p class="lead">Every size, tracked to the unit — and who restocked it.</p>
+    </div>
+    <div class="pcard abs shadow" data-pcard>
+      <div class="head"><span class="photo"><svg class="icon"><use href="#i-shirt"/></svg></span><div><b>Oxford Shirt</b><small>OXF-12 · 4 variants</small></div></div>
+      <div class="sizes">
+        <div class="size" data-size="M"><small>M</small><b><span data-q>0</span><em>/24</em></b><div class="barx"><i data-bar></i></div></div>
+        <div class="size" data-size="L"><small>L</small><b><span data-q>0</span><em>/24</em></b><div class="barx"><i data-bar></i></div></div>
+        <div class="size" data-size="XL"><small>XL</small><b><span data-q>0</span><em>/24</em></b><div class="barx"><i data-bar></i></div></div>
+        <div class="size" data-size="XXL"><small>XXL</small><b><span data-q>0</span><em>/12</em></b><div class="barx"><i data-bar></i></div></div>
+      </div>
+    </div>
+    <div class="itoasts abs">
+      <div class="toast itoast-low" data-it="low"><span class="pulse"></span><span data-ittext><b>Low stock</b> · OXF-12-L · 3 left</span></div>
+      <div class="toast" data-it="restock"><svg class="avc" viewBox="20 12 80 80"><use href="#av-ayesha" width="120" height="120"/></svg><span><b>Ayesha</b> restocked OXF-12-L</span><em class="up">+20</em></div>
+      <div class="toast" data-it="order"><svg class="avc" viewBox="20 12 80 80"><use href="#av-nabila" width="120" height="120"/></svg><span><b>Nabila</b> · Order #2055 · OXF-12-M</span><em class="down">−1</em></div>
+    </div>
+  </section>
+
+  <!-- 8 · Dashboard -->
+  <section class="scene on-dark" id="s-dash">
+    <div class="dash-title abs" data-dtitle>
+      <p class="eyebrow">Dashboard</p>
+      <p class="h2" style="margin-top:14px">Your whole business. <span style="color:#7cc8ff">At a glance.</span></p>
+    </div>
+    <div class="bento abs">
+      <div class="bc" data-bc style="left:0;top:0;width:820px;height:560px">
+        <small>Revenue · 30D</small>
+        <span class="big">BDT <span data-rev>0</span></span>
+        <span class="delta">▲ 12% vs previous 30 days</span>
+        <svg viewBox="0 0 300 84" preserveAspectRatio="none" style="position:absolute;left:34px;bottom:40px;width:752px;height:210px">
+          <line x1="0" y1="20" x2="300" y2="20" stroke="#f0f0f0" stroke-width="1"/>
+          <line x1="0" y1="48" x2="300" y2="48" stroke="#f0f0f0" stroke-width="1"/>
+          <polyline data-spark fill="none" stroke="#0066cc" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" points="0,72.4 10,65.2 20,68.8 30,54.4 40,61.6 50,58 60,47.2 70,61.6 80,65.2 90,50.8 100,43.6 110,54.4 120,58 130,40 140,47.2 150,50.8 160,36.4 170,29.2 180,43.6 190,47.2 200,32.8 210,40 220,25.6 230,36.4 240,43.6 250,22 260,29.2 270,18.4 280,25.6 290,11.2 300,6"/>
+        </svg>
+      </div>
+      <div class="bc" data-bc style="left:850px;top:0;width:830px;height:300px">
+        <small>Order activity · 13 weeks</small>
+        <div class="heatgrid" data-heat style="height:200px"></div>
+      </div>
+      <div class="bc" data-bc style="left:850px;top:326px;width:830px;height:234px">
+        <small>Top moderators · 30D</small>
+        <div style="display:grid;grid-template-columns:1fr 1fr;column-gap:40px" data-leaders></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9 · Feature parade -->
+  <section class="scene" id="s-parade" data-parade></section>
+
+  <!-- 10 · The cast -->
+  <section class="scene" id="s-cast">
+    <div class="hill abs"></div>
+    <div class="cast-title abs on-dark"><p class="h2" data-ct1>Run your store</p><p class="h2" style="color:#7cc8ff" data-ct2>on PrimeOMS.</p></div>
+    <div class="castrow abs">
+      <div class="p" data-cp><svg class="body" viewBox="0 0 120 120"><use href="#av-rafi" width="120" height="120"/></svg></div>
+      <div class="p" data-cp><svg class="body" viewBox="0 0 120 120"><use href="#av-tanvir" width="120" height="120"/></svg></div>
+      <div class="p lead" data-cp>
+        <span class="speech" data-speech>See you inside!</span>
+        <svg class="body" viewBox="0 0 120 120"><use href="#av-nabila" width="120" height="120"/></svg>
+        <svg class="hand" data-hand viewBox="0 0 40 52"><use href="#av-hand" width="40" height="52"/></svg>
+      </div>
+      <div class="p" data-cp><svg class="body" viewBox="0 0 120 120"><use href="#av-ayesha" width="120" height="120"/></svg></div>
+      <div class="p" data-cp><svg class="body" viewBox="0 0 120 120"><use href="#av-sadia" width="120" height="120"/></svg></div>
+    </div>
+  </section>
+
+  <!-- 11 · End card -->
+  <section class="scene" id="s-end">
+    <div class="end-lock abs">
+      <div class="end-badge" data-ebadge><img src="../assets/primeoms-logo.png" alt=""></div>
+      <div class="end-word" data-eword>PrimeOMS</div>
+      <div class="end-tag" data-etag>Every order. One calm place.</div>
+      <div class="end-cta" data-ecta>Book a demo</div>
+    </div>
+    <div class="cursor" data-ecursor style="--c:#1d1d1f">
+      <span class="ripple" data-ripple></span>
+      <svg class="arrow" viewBox="0 0 32 32"><path d="M3 3l10 26 3.8-10.8 10.8-3.8z"/></svg>
+      <span class="tag"><svg viewBox="20 12 80 80"><use href="#av-tanvir" width="120" height="120"/></svg>Tanvir</span>
+    </div>
+  </section>
+
+  <div class="fade" data-fade></div>
+</div>
+
+<script src="compose.js"></script>
+</body>
+</html>

@@ -1,0 +1,980 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PrimeOMS — Order management for online sellers</title>
+  <meta name="description" content="PrimeOMS is the order management system for brands that sell on Facebook and their own store. Orders, fraud checks, Pathao, Steadfast and Carrybee couriers, inventory, and team permissions in one place.">
+  <meta name="theme-color" content="#000000">
+  <meta property="og:title" content="PrimeOMS — Every order. One calm place.">
+  <meta property="og:description" content="The order management system for brands that sell on Facebook and their own store.">
+  <meta property="og:type" content="website">
+  <link rel="icon" type="image/png" href="assets/primeoms-logo.png">
+  <link rel="apple-touch-icon" href="assets/primeoms-logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/scenes.css">
+  <link rel="stylesheet" href="css/motion.css">
+  <script>document.documentElement.classList.add('js')</script>
+</head>
+<body>
+
+<!-- Icon sprite -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-orders" viewBox="0 0 24 24"><path d="M9 3.5h6v3H9z"/><path d="M15 5h2a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h2"/><path d="M9 12h6M9 16h4"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 4.5-3 8.3-7 10-4-1.7-7-5.5-7-10V6z"/><path d="M9 12l2 2 4-4"/></symbol>
+  <symbol id="i-truck" viewBox="0 0 24 24"><path d="M3 6h11v10H3z"/><path d="M14 9h4l3 3v4h-7"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></symbol>
+  <symbol id="i-box" viewBox="0 0 24 24"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/><path d="M4 7.5l8 4.5 8-4.5"/><path d="M12 12v9"/></symbol>
+  <symbol id="i-tag" viewBox="0 0 24 24"><path d="M3 12V4h8l10 10-8 8z"/><circle cx="7.5" cy="8.5" r="1.5"/></symbol>
+  <symbol id="i-layers" viewBox="0 0 24 24"><path d="M12 3l9 5-9 5-9-5z"/><path d="M3 13l9 5 9-5"/></symbol>
+  <symbol id="i-percent" viewBox="0 0 24 24"><path d="M19 5L5 19"/><circle cx="7" cy="7" r="2.5"/><circle cx="17" cy="17" r="2.5"/></symbol>
+  <symbol id="i-exchange" viewBox="0 0 24 24"><path d="M4 8h15l-3.5-3.5"/><path d="M20 16H5l3.5 3.5"/></symbol>
+  <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 9.5h8M8 12.5h5"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 7l8.5 6 8.5-6"/></symbol>
+  <symbol id="i-doc" viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h6"/></symbol>
+  <symbol id="i-store" viewBox="0 0 24 24"><path d="M4.5 10v10h15V10"/><path d="M3 10l2-6h14l2 6z"/><path d="M10 20v-5h4v5"/></symbol>
+  <symbol id="i-chart" viewBox="0 0 24 24"><path d="M5 20V11M11 20V4M17 20v-7M3 20h18"/></symbol>
+  <symbol id="i-trend" viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></symbol>
+  <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1"/></symbol>
+  <symbol id="i-wallet" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18"/><path d="M15.5 15h2"/></symbol>
+  <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 16v-5a6 6 0 0 1 12 0v5l2 2H4z"/><path d="M10 20.5a2 2 0 0 0 4 0"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7"/><path d="M18 14a6.5 6.5 0 0 1 3.5 6"/></symbol>
+  <symbol id="i-draft" viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M13 7l4 4"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V5a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h3"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a1 1 0 0 1-1 1A16 16 0 0 1 4 5a1 1 0 0 1 1-1"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+  <symbol id="i-report" viewBox="0 0 24 24"><path d="M12 4v11"/><path d="M7.5 10.5L12 15l4.5-4.5"/><path d="M4 19h16"/></symbol>
+  <symbol id="i-flask" viewBox="0 0 24 24"><path d="M9 3h6M10 3v6l-5.5 9.5A1.7 1.7 0 0 0 6 21h12a1.7 1.7 0 0 0 1.5-2.5L14 9V3"/><path d="M7.5 15h9"/></symbol>
+  <symbol id="i-key" viewBox="0 0 24 24"><circle cx="8" cy="15" r="4"/><path d="M11 12l9-9M17 6l3 3M14.5 8.5l2 2"/></symbol>
+  <symbol id="i-person" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></symbol>
+  <symbol id="i-log" viewBox="0 0 24 24"><path d="M8 6h12M8 12h12M8 18h12"/><circle cx="4" cy="6" r="1"/><circle cx="4" cy="12" r="1"/><circle cx="4" cy="18" r="1"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M5 9h14M5 15h14"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+  <symbol id="i-chevron" viewBox="0 0 24 24"><path d="M6 9.5l6 6 6-6"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-shirt" viewBox="0 0 24 24"><path d="M8.5 4L3 7l2 5 3-1.2V20h8v-9.2l3 1.2 2-5-5.5-3c-.8 1.8-2.1 2.8-3.5 2.8S9.3 5.8 8.5 4z"/></symbol>
+
+  <!-- Illustration: hand-hatched portraits — blue, white & pearl green. Spec: avatardesign.md -->
+  <defs>
+    <pattern id="hatch" width="2.6" height="2.6" patternUnits="userSpaceOnUse" patternTransform="rotate(40)"><path class="av-hatch" d="M1.3 0v2.6" stroke-width=".6"/></pattern>
+    <pattern id="hatch-x" width="2.2" height="2.2" patternUnits="userSpaceOnUse" patternTransform="rotate(-50)"><path class="av-hatch" d="M1.1 0v2.2" stroke-width=".8"/></pattern>
+    <radialGradient id="av-pearl" cx="36%" cy="32%" r="78%"><stop offset="0" class="av-pearl-0"/><stop offset=".55" class="av-pearl-1"/><stop offset="1" class="av-pearl-2"/></radialGradient>
+  </defs>
+
+  <symbol id="av-nabila" viewBox="0 0 120 120">
+    <g class="av-line" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <path class="f-t2" d="M8 121c3-18 16-29 36-32h32c20 3 33 14 36 32z"/>
+      <path d="M86 92c12 5 21 14 24 29H90c1-10 0-20-4-29z" fill="url(#hatch)" stroke="none"/>
+      <path class="f-white" d="M60 15c-19 0-30 14-30 33 0 10 2 18 0 25-2 7-7 13-13 19 11 5 26 7 43 7s32-2 43-7c-6-6-11-12-13-19-2-7 0-15 0-25 0-19-11-33-30-33z"/>
+      <path d="M75 20c9 6 15 15 15 28 0 10-2 18 0 25 2 7 7 13 13 19-6 3-13 5-21 6 4-8 5-18 3-28-2-12 0-26-10-50z" fill="url(#hatch)" stroke="none"/>
+      <path class="f-t1" d="M40 48c0-15 9-25 20-25s20 10 20 25c0 16-8 27-20 30-12-3-20-14-20-30z"/>
+      <path class="f-skin" d="M43 48c0-13 7-21 17-21s17 8 17 21c0 15-8 25-17 25s-17-10-17-25z"/>
+      <path d="M70 31c5 4 7 10 7 17 0 15-8 25-17 25 6-4 11-12 11-24 0-7 0-13-1-18z" fill="url(#hatch)" stroke="none"/>
+      <path d="M35 76c7 8 15 13 25 14 10-1 18-6 25-14M29 87c9 4 19 6 31 6" fill="none"/>
+      <path d="M48 40c3-2 6-2 9-1M63 39c3-1 6-1 9 1" fill="none" stroke-width="1.8"/>
+      <g class="av-eyes">
+      <circle class="f-eye" cx="52" cy="47.8" r="2.6" stroke-width=".6"/>
+      <circle class="f-eye" cx="68" cy="47.8" r="2.6" stroke-width=".6"/>
+      <g class="av-look">
+      <circle class="f-pupil" cx="52" cy="48" r=".9" stroke="none"/>
+      <circle class="f-pupil" cx="68" cy="48" r=".9" stroke="none"/>
+      <circle class="f-glint" cx="51.1" cy="47" r=".5" stroke="none"/>
+      <circle class="f-glint" cx="67.1" cy="47" r=".5" stroke="none"/>
+      </g></g>
+      <path d="M48.6 46.4c2.2-2 4.6-2 6.8 0M64.6 46.4c2.2-2 4.6-2 6.8 0" fill="none"/>
+      <path d="M60 50c0 3-1 6-3 8 2 .8 4 .8 5 0" fill="none"/>
+      <path d="M54 64c3 3 9 3 12 0" fill="none"/>
+    </g>
+  </symbol>
+
+  <symbol id="av-tanvir" viewBox="0 0 120 120">
+    <g class="av-line" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <path class="f-t1" d="M10 121c2-19 15-30 36-34h28c21 4 34 15 36 34z"/>
+      <path d="M84 89c12 5 21 14 24 32H86c2-11 1-22-2-32z" fill="url(#hatch)" stroke="none"/>
+      <path class="f-skin" d="M51 70v16c3 5 15 5 18 0V70"/>
+      <path d="M63 72v15c3-1 5-2 6-4V70z" fill="url(#hatch)" stroke="none"/>
+      <path class="f-white" d="M47 86l13 11-9 6-6-10zM73 86L60 97l9 6 6-10z"/>
+      <path class="f-skin" d="M40 49c-5-2-7 2-6 6 1 5 4 7 7 6M80 49c5-2 7 2 6 6-1 5-4 7-7 6"/>
+      <path class="f-skin" d="M40 46c0-16 9-26 20-26s20 10 20 26c0 18-9 31-20 31S40 64 40 46z"/>
+      <path d="M71 26c6 5 9 12 9 21 0 17-9 30-20 30 7-4 13-14 14-27 1-10-1-18-3-24z" fill="url(#hatch)" stroke="none"/>
+      <path class="f-hair" d="M39 46c-2-17 7-29 21-29s23 12 21 29c-1-5-3-9-6-11-5 1-12 0-18-2-6 1-11 3-14 6-2 2-3 5-4 7z"/>
+      <path d="M41 55c1 14 9 22 19 22s18-8 19-22c-2 5-5 8-9 9-3-3-6-4-10-4s-7 1-10 4c-4-1-7-4-9-9z" fill="url(#hatch-x)"/>
+      <path class="f-skin" d="M55 67c3 2 7 2 10 0"/>
+      <g class="av-eyes">
+      <circle class="f-eye" cx="50.5" cy="48.2" r="2.6" stroke-width=".6"/>
+      <circle class="f-eye" cx="69.5" cy="48.2" r="2.6" stroke-width=".6"/>
+      <g class="av-look">
+      <circle class="f-pupil" cx="50.5" cy="48.4" r=".9" stroke="none"/>
+      <circle class="f-pupil" cx="69.5" cy="48.4" r=".9" stroke="none"/>
+      <circle class="f-glint" cx="49.7" cy="47.4" r=".5" stroke="none"/>
+      <circle class="f-glint" cx="68.7" cy="47.4" r=".5" stroke="none"/>
+      </g></g>
+      <path d="M47.3 46.9c2-1.9 4.4-1.9 6.4 0M66.3 46.9c2-1.9 4.4-1.9 6.4 0" fill="none"/>
+      <rect x="44" y="43" width="13" height="10" rx="4" fill="none"/>
+      <rect x="63" y="43" width="13" height="10" rx="4" fill="none"/>
+      <path d="M57 47c2-1 4-1 6 0M44 46l-4-1M76 46l4-1" fill="none"/>
+      <path d="M45 40c3-2 7-2 10-1M65 39c3-1 7-1 10 1" fill="none" stroke-width="2"/>
+      <path d="M60 50c-1 4-2 7-4 9 2 1 4 1 6 0" fill="none"/>
+    </g>
+  </symbol>
+
+  <symbol id="av-ayesha" viewBox="0 0 120 120">
+    <g class="av-line" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <path class="f-hair" d="M60 17c-17 0-26 12-26 29 0 13 1 25-4 38 9 5 19 7 30 7s21-2 30-7c-5-13-4-25-4-38 0-17-9-29-26-29z"/>
+      <path class="f-t3" d="M10 121c3-18 16-29 35-32h30c19 3 32 14 35 32z"/>
+      <path d="M85 91c11 5 20 14 23 30H88c1-11 0-21-3-30z" fill="url(#hatch)" stroke="none"/>
+      <path class="f-skin" d="M52 68v17c3 4 13 4 16 0V68"/>
+      <path d="M46 89c4 6 9 9 14 9s10-3 14-9" fill="none"/>
+      <path class="f-skin" d="M42 47c0-14 8-23 18-23s18 9 18 23c0 16-8 27-18 27S42 63 42 47z"/>
+      <path d="M70 29c5 4 8 10 8 18 0 16-8 27-18 27 7-4 12-13 12-26 0-8-1-14-2-19z" fill="url(#hatch)" stroke="none"/>
+      <path class="f-hair" d="M60 21c-10 0-18 7-19 20-1 6-1 12 0 17 2-12 8-24 19-33zM60 21c10 0 18 7 19 20 1 6 1 12 0 17-2-12-8-24-19-33z"/>
+      <path class="s-sheen" d="M38 62c-1 8-3 15-6 21M82 62c1 8 3 15 6 21M47 24c-4 4-6 9-7 15" fill="none" stroke-width="1"/>
+      <path d="M48 41c3-2 6-2 9-1M63 40c3-1 6-1 9 1" fill="none" stroke-width="1.8"/>
+      <g class="av-eyes">
+      <circle class="f-eye" cx="52.5" cy="48.2" r="2.6" stroke-width=".6"/>
+      <circle class="f-eye" cx="67.5" cy="48.2" r="2.6" stroke-width=".6"/>
+      <g class="av-look">
+      <circle class="f-pupil" cx="52.5" cy="48.4" r=".9" stroke="none"/>
+      <circle class="f-pupil" cx="67.5" cy="48.4" r=".9" stroke="none"/>
+      <circle class="f-glint" cx="51.6" cy="47.4" r=".5" stroke="none"/>
+      <circle class="f-glint" cx="66.6" cy="47.4" r=".5" stroke="none"/>
+      </g></g>
+      <path d="M49.1 46.8c2.2-2 4.6-2 6.8 0M64.1 46.8c2.2-2 4.6-2 6.8 0M49.4 46.3l-1.6-1.3M70.6 46.3l1.6-1.3" fill="none"/>
+      <path d="M60 50c0 3-1 6-3 8 2 .8 4 .8 5 0" fill="none"/>
+      <path d="M54 63c3 3 9 3 12 0" fill="none"/>
+      <circle class="f-white" cx="42.5" cy="60" r="1.8"/>
+      <circle class="f-white" cx="77.5" cy="60" r="1.8"/>
+    </g>
+  </symbol>
+
+  <symbol id="av-rafi" viewBox="0 0 120 120">
+    <g class="av-line" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <path class="f-t2" d="M8 121c3-19 17-30 37-33h30c20 3 34 14 37 33z"/>
+      <path d="M86 91c12 5 21 14 24 30H88c1-11 1-21-2-30z" fill="url(#hatch)" stroke="none"/>
+      <path class="f-skin" d="M51 69v16c3 5 15 5 18 0V69"/>
+      <path class="f-t1" d="M44 88c4 8 9 12 16 12s12-4 16-12"/>
+      <path d="M54 99v10M66 99v10" fill="none"/>
+      <path class="f-skin" d="M40 49c-5-2-7 2-6 6 1 5 4 7 7 6M80 49c5-2 7 2 6 6-1 5-4 7-7 6"/>
+      <path class="f-skin" d="M40 46c0-16 9-26 20-26s20 10 20 26c0 18-9 31-20 31S40 64 40 46z"/>
+      <path d="M71 26c6 5 9 12 9 21 0 17-9 30-20 30 7-4 13-14 14-27 1-10-1-18-3-24z" fill="url(#hatch)" stroke="none"/>
+      <path d="M46 62c3 9 8 14 14 14s11-5 14-14c-4 4-9 6-14 6s-10-2-14-6z" fill="url(#hatch)" stroke="none"/>
+      <path class="f-hair" d="M38 44c-4-3-4-9 0-12-1-5 3-9 8-9 1-5 7-7 11-5 3-4 10-4 13 0 5-2 10 1 11 6 5 1 7 6 5 10 3 3 2 8-1 10-1-4-4-6-7-7-3 2-7 2-10 0-3 2-8 2-11 0-3 2-7 2-10 0-4 1-7 3-9 7z"/>
+      <path class="s-sheen" d="M46 27c1 1 2 1 3 0M56 22c1 1 2 1 3 0M67 23c1 1 2 1 3 0M76 28c1 1 2 1 3 0" fill="none" stroke-width="1"/>
+      <path d="M46 42c3-1 7-1 10 0M64 42c3-1 7-1 10 0" fill="none" stroke-width="1.8"/>
+      <g class="av-eyes">
+      <circle class="f-eye" cx="51" cy="49.2" r="2.6" stroke-width=".6"/>
+      <circle class="f-eye" cx="69" cy="49.2" r="2.6" stroke-width=".6"/>
+      <g class="av-look">
+      <circle class="f-pupil" cx="51" cy="49.4" r=".9" stroke="none"/>
+      <circle class="f-pupil" cx="69" cy="49.4" r=".9" stroke="none"/>
+      <circle class="f-glint" cx="50.2" cy="48.4" r=".5" stroke="none"/>
+      <circle class="f-glint" cx="68.2" cy="48.4" r=".5" stroke="none"/>
+      </g></g>
+      <path d="M47.8 47.9c2-1.9 4.4-1.9 6.4 0M65.8 47.9c2-1.9 4.4-1.9 6.4 0" fill="none"/>
+      <path d="M60 51c-1 3-2 6-4 8 2 .8 4 .8 5 0" fill="none"/>
+      <path class="f-white" d="M53 63c4 5 10 5 14 0z"/>
+    </g>
+  </symbol>
+
+  <symbol id="av-sadia" viewBox="0 0 120 120">
+    <g class="av-line" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <path class="f-t1" d="M10 121c3-18 16-29 35-32h30c19 3 32 14 35 32z"/>
+      <path class="f-t2" d="M14 121c2-14 9-24 20-29l14 7c-6 6-10 13-11 22z"/>
+      <path d="M85 91c11 5 20 14 23 30H88c1-11 0-21-3-30z" fill="url(#hatch)" stroke="none"/>
+      <path class="f-skin" d="M52 68v17c3 4 13 4 16 0V68"/>
+      <path d="M47 89c4 5 8 8 13 8s9-3 13-8" fill="none"/>
+      <circle class="f-hair" cx="60" cy="15" r="8"/>
+      <path class="f-hair" d="M39 50c-3-18 6-30 21-30s24 12 21 30c-1 4-2 7-4 9 1-12-4-22-17-26-10 3-16 12-17 26-2-2-3-5-4-9z"/>
+      <path class="f-skin" d="M42 47c0-14 8-23 18-23s18 9 18 23c0 16-8 27-18 27S42 63 42 47z"/>
+      <path d="M70 29c5 4 8 10 8 18 0 16-8 27-18 27 7-4 12-13 12-26 0-8-1-14-2-19z" fill="url(#hatch)" stroke="none"/>
+      <path class="f-hair" d="M43 42c2-12 9-19 19-19 8 0 14 4 16 11-8-4-17-3-24 2-4 2-8 4-11 6z"/>
+      <path class="s-sheen" d="M57 11c2-2 5-2 7 0M50 27c4-3 9-4 14-3" fill="none" stroke-width="1"/>
+      <path d="M48 42c3-1.5 6-1.5 9-.5M63 41c3-1 6-1 9 1" fill="none" stroke-width="1.8"/>
+      <g class="av-eyes">
+      <circle class="f-eye" cx="52.5" cy="48.4" r="2.6" stroke-width=".6"/>
+      <circle class="f-eye" cx="67.5" cy="48.4" r="2.6" stroke-width=".6"/>
+      <g class="av-look">
+      <circle class="f-pupil" cx="52.5" cy="48.6" r=".9" stroke="none"/>
+      <circle class="f-pupil" cx="67.5" cy="48.6" r=".9" stroke="none"/>
+      <circle class="f-glint" cx="51.6" cy="47.6" r=".5" stroke="none"/>
+      <circle class="f-glint" cx="66.6" cy="47.6" r=".5" stroke="none"/>
+      </g></g>
+      <path d="M49.1 47c2.2-2 4.6-2 6.8 0M64.1 47c2.2-2 4.6-2 6.8 0" fill="none"/>
+      <path d="M60 50.5c0 3-1 6-3 8 2 .8 4 .8 5 0" fill="none"/>
+      <path d="M54 63.5c3 3 9 3 12 0" fill="none"/>
+    </g>
+  </symbol>
+
+  <symbol id="av-hand" viewBox="0 0 40 52">
+    <g class="av-line" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <path class="f-t2" d="M11 40h18v12H11z"/>
+      <path class="f-skin" d="M11 41c-3-4-6-9-7-13-1-3 2-5 4-3l4 5V10c0-2.5 4-2.5 4 0V7c0-2.5 4-2.5 4 0v1c0-2.5 4-2.5 4 0v3c0-2.5 4-2.5 4 0v18c0 7-3 13-8 15h-6c-1 0-2-.4-3-1z"/>
+      <path d="M16 10v14M20 8v16M24 11v13" fill="none" stroke-width="1.2"/>
+    </g>
+  </symbol>
+
+  <symbol id="doodle-flowers" viewBox="0 0 120 32">
+    <g fill="#ffffff" opacity=".92">
+      <g transform="translate(16 18)"><circle r="2.4" cy="-3.4"/><circle r="2.4" cx="3.2" cy="-1.1"/><circle r="2.4" cx="2" cy="2.8"/><circle r="2.4" cx="-2" cy="2.8"/><circle r="2.4" cx="-3.2" cy="-1.1"/><circle class="d-center" r="1.6"/></g>
+      <g transform="translate(60 11) scale(.7)"><circle r="2.4" cy="-3.4"/><circle r="2.4" cx="3.2" cy="-1.1"/><circle r="2.4" cx="2" cy="2.8"/><circle r="2.4" cx="-2" cy="2.8"/><circle r="2.4" cx="-3.2" cy="-1.1"/><circle class="d-center" r="1.6"/></g>
+      <g transform="translate(98 20) scale(.85)"><circle r="2.4" cy="-3.4"/><circle r="2.4" cx="3.2" cy="-1.1"/><circle r="2.4" cx="2" cy="2.8"/><circle r="2.4" cx="-2" cy="2.8"/><circle r="2.4" cx="-3.2" cy="-1.1"/><circle class="d-center" r="1.6"/></g>
+      <circle cx="80" cy="27" r="1.2"/>
+      <circle cx="36" cy="7" r="1"/>
+    </g>
+    <g fill="none" stroke="#ffffff" stroke-width="1.2" stroke-linecap="round" opacity=".75">
+      <path d="M22 25c3-2 6-2 9 0M72 22c2-3 5-4 8-3M104 9c2 1 3 3 3 5"/>
+    </g>
+    <path class="d-spark" d="M42 9l1 2.6 2.6 1-2.6 1-1 2.6-1-2.6-2.6-1 2.6-1zM112 22l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z"/>
+  </symbol>
+</svg>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- Announcement bar -->
+<div class="announce">
+  <a class="announce__link" href="#how">
+    <svg class="announce__doodle" viewBox="0 0 120 32" aria-hidden="true"><use href="#doodle-flowers"/></svg>
+    <span class="announce__long">See how an order goes from Facebook DM to doorstep — in three steps</span>
+    <span class="announce__short">From Facebook DM to doorstep, in three steps</span>
+    <svg class="icon announce__arrow" aria-hidden="true"><use href="#i-arrow"/></svg>
+    <svg class="announce__doodle announce__doodle--r" viewBox="0 0 120 32" aria-hidden="true"><use href="#doodle-flowers"/></svg>
+  </a>
+</div>
+
+<!-- Navbar (mega menu) -->
+<header class="nav" data-nav>
+  <div class="nav__inner">
+    <a class="nav__logo" href="#top" aria-label="PrimeOMS home">
+      <img src="assets/primeoms-logo.png" alt="" width="24" height="28">
+      <span>Prime<em>OMS</em></span>
+    </a>
+
+    <nav class="nav__menu" aria-label="Main">
+      <ul class="nav__items">
+
+        <!-- Product -->
+        <li class="nav__item">
+          <button class="nav__trigger" type="button" aria-expanded="false" aria-controls="mm-product">Product<svg class="icon nav__chev" aria-hidden="true"><use href="#i-chevron"/></svg></button>
+          <div class="mm mm--product" id="mm-product">
+            <ul class="mm__links">
+              <li><a class="mm-link" href="#orders"><span class="mm-link__icon"><svg class="icon"><use href="#i-orders"/></svg></span><span><b>Orders &amp; drafts</b><small>Every order on one calm board</small></span></a></li>
+              <li><a class="mm-link" href="#fraud-check"><span class="mm-link__icon"><svg class="icon"><use href="#i-shield"/></svg></span><span><b>Fraud Check</b><small>Know before you ship</small></span></a></li>
+              <li><a class="mm-link" href="#couriers"><span class="mm-link__icon"><svg class="icon"><use href="#i-truck"/></svg></span><span><b>Couriers &amp; payments</b><small>Pathao, Steadfast, Carrybee, bKash</small></span></a></li>
+              <li><a class="mm-link" href="#inventory"><span class="mm-link__icon"><svg class="icon"><use href="#i-box"/></svg></span><span><b>Inventory</b><small>Every size, tracked to the unit</small></span></a></li>
+              <li><a class="mm-link" href="#dashboard"><span class="mm-link__icon"><svg class="icon"><use href="#i-chart"/></svg></span><span><b>Dashboard</b><small>Your whole business at a glance</small></span></a></li>
+              <li><a class="mm-link" href="#team"><span class="mm-link__icon"><svg class="icon"><use href="#i-users"/></svg></span><span><b>Team &amp; permissions</b><small>Per-feature access, full audit trail</small></span></a></li>
+            </ul>
+            <div class="mm-stat">
+              <p class="mm-stat__num">3</p>
+              <p class="mm-stat__cap">couriers, built in</p>
+              <p class="mm-stat__sub">Send with one tap. Status comes back on its own.</p>
+              <ul class="mm-stat__rows">
+                <li><svg class="icon"><use href="#i-truck"/></svg><span>Pathao Courier</span><em><svg class="icon"><use href="#i-check"/></svg>Built in</em></li>
+                <li><svg class="icon"><use href="#i-truck"/></svg><span>Steadfast Courier</span><em><svg class="icon"><use href="#i-check"/></svg>Built in</em></li>
+                <li><svg class="icon"><use href="#i-truck"/></svg><span>Carrybee Courier</span><em><svg class="icon"><use href="#i-check"/></svg>Built in</em></li>
+                <li><svg class="icon"><use href="#i-wallet"/></svg><span>bKash Payments</span><em><svg class="icon"><use href="#i-check"/></svg>Built in</em></li>
+              </ul>
+            </div>
+            <figure class="mm-quote">
+              <figcaption class="mm-quote__kicker">A day on PrimeOMS</figcaption>
+              <blockquote>“I take the order in Messenger, check the number, and send it to Pathao — before the 6:30 cutoff.”</blockquote>
+              <p class="mm-quote__who">Nabila · Moderator</p>
+              <svg class="mm-quote__art" viewBox="0 0 120 120" aria-hidden="true"><use href="#av-nabila" width="120" height="120"/></svg>
+            </figure>
+          </div>
+        </li>
+
+        <!-- Features -->
+        <li class="nav__item">
+          <button class="nav__trigger" type="button" aria-expanded="false" aria-controls="mm-features">Features<svg class="icon nav__chev" aria-hidden="true"><use href="#i-chevron"/></svg></button>
+          <div class="mm mm--features" id="mm-features">
+            <ul class="mm__links mm__links--2">
+              <li><a class="mm-link" href="#features"><span class="mm-link__icon"><svg class="icon"><use href="#i-layers"/></svg></span><span><b>Catalog &amp; combos</b><small>Products, variants and SKUs</small></span></a></li>
+              <li><a class="mm-link" href="#features"><span class="mm-link__icon"><svg class="icon"><use href="#i-percent"/></svg></span><span><b>Promotions &amp; codes</b><small>Multibuy offers and discount codes</small></span></a></li>
+              <li><a class="mm-link" href="#features"><span class="mm-link__icon"><svg class="icon"><use href="#i-exchange"/></svg></span><span><b>Exchanges</b><small>Requests inside your window</small></span></a></li>
+              <li><a class="mm-link" href="#features"><span class="mm-link__icon"><svg class="icon"><use href="#i-star"/></svg></span><span><b>Reviews &amp; feedback</b><small>Moderate and listen in one place</small></span></a></li>
+              <li><a class="mm-link" href="#features"><span class="mm-link__icon"><svg class="icon"><use href="#i-mail"/></svg></span><span><b>Offer &amp; delivery emails</b><small>Reach every active customer</small></span></a></li>
+              <li><a class="mm-link" href="#features"><span class="mm-link__icon"><svg class="icon"><use href="#i-doc"/></svg></span><span><b>Invoices</b><small>PDF and email, with your note</small></span></a></li>
+              <li><a class="mm-link" href="#features"><span class="mm-link__icon"><svg class="icon"><use href="#i-store"/></svg></span><span><b>Your storefront</b><small>Branding, pages, FAQ and more</small></span></a></li>
+              <li><a class="mm-link" href="#features"><span class="mm-link__icon"><svg class="icon"><use href="#i-trend"/></svg></span><span><b>Visitor analytics</b><small>Traffic, referrers and devices</small></span></a></li>
+            </ul>
+            <figure class="mm-quote">
+              <figcaption class="mm-quote__kicker">A day on PrimeOMS</figcaption>
+              <blockquote>“I can see who created every order, and every change anyone made to it.”</blockquote>
+              <p class="mm-quote__who">Tanvir · Store owner</p>
+              <svg class="mm-quote__art" viewBox="0 0 120 120" aria-hidden="true"><use href="#av-tanvir" width="120" height="120"/></svg>
+            </figure>
+          </div>
+        </li>
+
+        <!-- Built for -->
+        <li class="nav__item">
+          <button class="nav__trigger" type="button" aria-expanded="false" aria-controls="mm-built">Built for<svg class="icon nav__chev" aria-hidden="true"><use href="#i-chevron"/></svg></button>
+          <div class="mm mm--built" id="mm-built">
+            <div class="mm__col">
+              <ul class="mm__links">
+                <li><a class="mm-link" href="#orders"><span class="mm-link__icon"><svg class="icon"><use href="#i-chat"/></svg></span><span><b>Facebook-first brands</b><small>Turn conversations into orders</small></span></a></li>
+                <li><a class="mm-link" href="#inventory"><span class="mm-link__icon"><svg class="icon"><use href="#i-shirt"/></svg></span><span><b>Fashion &amp; apparel</b><small>Sizes and variants, always counted</small></span></a></li>
+                <li><a class="mm-link" href="#team"><span class="mm-link__icon"><svg class="icon"><use href="#i-users"/></svg></span><span><b>Growing teams</b><small>Moderators with guardrails</small></span></a></li>
+              </ul>
+              <a class="mm-more" href="#how"><span><b>New here?</b>See how an order flows, start to finish</span><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+            </div>
+            <figure class="mm-quote">
+              <figcaption class="mm-quote__kicker">A day on PrimeOMS</figcaption>
+              <blockquote>“Every size of every product. I know what’s running low before a customer asks.”</blockquote>
+              <p class="mm-quote__who">Ayesha · Operations</p>
+              <svg class="mm-quote__art" viewBox="0 0 120 120" aria-hidden="true"><use href="#av-ayesha" width="120" height="120"/></svg>
+            </figure>
+          </div>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="nav__actions">
+      <a class="nav__text" href="#how">How it works</a>
+      <a class="nav__cta" href="#get-started">Book a demo</a>
+      <button class="nav__burger" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Open menu">
+        <svg class="icon icon--open" aria-hidden="true"><use href="#i-menu"/></svg>
+        <svg class="icon icon--close" aria-hidden="true"><use href="#i-close"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile drawer -->
+  <div class="drawer" id="drawer">
+    <div class="drawer__ctas">
+      <a class="nav__cta" href="#get-started">Book a demo</a>
+      <a class="drawer__alt" href="#how">How it works</a>
+    </div>
+    <div class="drawer__group">
+      <p class="drawer__label">Product</p>
+      <a href="#orders">Orders &amp; drafts</a>
+      <a href="#fraud-check">Fraud Check</a>
+      <a href="#couriers">Couriers &amp; payments</a>
+      <a href="#inventory">Inventory</a>
+      <a href="#dashboard">Dashboard</a>
+      <a href="#team">Team &amp; permissions</a>
+    </div>
+    <div class="drawer__group">
+      <p class="drawer__label">Features</p>
+      <details>
+        <summary>All features<svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg></summary>
+        <a href="#features">Catalog &amp; combos</a>
+        <a href="#features">Promotions &amp; codes</a>
+        <a href="#features">Exchanges</a>
+        <a href="#features">Reviews &amp; feedback</a>
+        <a href="#features">Offer &amp; delivery emails</a>
+        <a href="#features">Invoices</a>
+        <a href="#features">Your storefront</a>
+        <a href="#features">Visitor analytics</a>
+      </details>
+    </div>
+    <div class="drawer__group">
+      <p class="drawer__label">Built for</p>
+      <a href="#orders">Facebook-first brands</a>
+      <a href="#inventory">Fashion &amp; apparel</a>
+      <a href="#team">Growing teams</a>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <!-- Hero -->
+  <section class="hero2" id="top" data-scene="hero">
+    <div class="hero2__inner">
+      <div class="hero2__copy">
+        <p class="presence">
+          <span class="presence__stack" aria-hidden="true">
+            <svg class="av" viewBox="20 12 80 80"><use href="#av-nabila" width="120" height="120"/></svg>
+            <svg class="av" viewBox="20 12 80 80"><use href="#av-tanvir" width="120" height="120"/></svg>
+            <svg class="av" viewBox="20 12 80 80"><use href="#av-ayesha" width="120" height="120"/></svg>
+            <svg class="av" viewBox="20 12 80 80"><use href="#av-rafi" width="120" height="120"/></svg>
+          </span>
+          <span class="live-dot" aria-hidden="true"></span>
+          <span>Interactive demo · your whole team, one board</span>
+        </p>
+        <h1 class="h-hero hero2__title">Every order.<br><span class="hero2__accent">One calm place.</span></h1>
+        <p class="hero2__lead">The order management system for brands that sell on Facebook and their own store. Couriers, stock, and your whole team — built in.</p>
+        <div class="hero2__ctas">
+          <a class="btn btn--primary btn--lg" href="#get-started">Book a demo</a>
+          <a class="btn btn--ghost btn--lg" href="#how">See how it works</a>
+        </div>
+        <ul class="hero2__ticks">
+          <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Pathao, Steadfast &amp; Carrybee built in</li>
+          <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Fraud Check before you confirm</li>
+          <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Every change, logged</li>
+        </ul>
+      </div>
+
+      <div class="hero2__stage" data-tilt>
+        <div class="stage" role="img" aria-label="Demo of the PrimeOMS orders board: Nabila sends order 2047 to Pathao while Tanvir watches revenue, and a new Facebook order arrives.">
+          <div class="window stage__window" aria-hidden="true" data-hero-window>
+            <div class="window__bar">
+              <span class="window__dots"><i></i><i></i><i></i></span>
+              <span class="window__url">admin.yourstore.com/orders</span>
+              <span class="bar-presence">
+                <svg class="av av--xs" viewBox="20 12 80 80"><use href="#av-nabila" width="120" height="120"/></svg>
+                <svg class="av av--xs" viewBox="20 12 80 80"><use href="#av-tanvir" width="120" height="120"/></svg>
+                <svg class="av av--xs" viewBox="20 12 80 80"><use href="#av-ayesha" width="120" height="120"/></svg>
+              </span>
+            </div>
+            <div class="mini-app">
+              <nav class="rail">
+                <img src="assets/primeoms-logo.png" alt="" width="20" height="24">
+                <i><svg class="icon"><use href="#i-chart"/></svg></i>
+                <i class="is-active"><svg class="icon"><use href="#i-orders"/></svg></i>
+                <i><svg class="icon"><use href="#i-draft"/></svg></i>
+                <i><svg class="icon"><use href="#i-shield"/></svg></i>
+                <i><svg class="icon"><use href="#i-box"/></svg></i>
+                <i><svg class="icon"><use href="#i-users"/></svg></i>
+              </nav>
+              <div class="mini-app__main">
+                <div class="app__head">
+                  <div><b class="app__title">All orders</b><small>312 total</small></div>
+                  <span class="m-btn">Create order</span>
+                </div>
+                <div class="m-kpis m-kpis--4">
+                  <div class="m-kpi"><small>Orders today</small><b data-kpi="orders">48</b></div>
+                  <div class="m-kpi"><small>Delivered</small><b>31</b></div>
+                  <div class="m-kpi m-kpi--warn"><small>Shipped</small><b data-kpi="shipped">12</b></div>
+                  <div class="m-kpi" data-kpi-box="revenue"><small>Revenue</small><b data-kpi="revenue">BDT 86,450</b></div>
+                </div>
+                <div class="m-orders m-orders--2">
+                  <article class="m-card" data-card="2047">
+                    <div class="m-card__top"><span class="m-check"></span><b>#2047</b><span class="chip chip--amber" data-status>Confirmed</span><time>7:34 PM</time></div>
+                    <div class="m-tags"><span class="chip chip--gray">Unpaid</span><span class="chip chip--gray">Facebook</span><span class="m-by"><svg class="av av--xs" viewBox="20 12 80 80"><use href="#av-nabila" width="120" height="120"/></svg>by Nabila</span></div>
+                    <div class="m-name">Sadia Rahman</div>
+                    <div class="m-line"><span class="m-thumb m-thumb--sand"></span><div><b>Linen Overshirt</b><small>LIN-04-M</small></div><span class="m-qty">1 × <em>M</em></span><span class="m-price">BDT 1,250</span></div>
+                    <div class="m-total"><div><small>Total bill</small><b>BDT 1,320.00</b></div><span class="m-courier" data-courier-btn>Add to Courier</span></div>
+                  </article>
+                  <article class="m-card">
+                    <div class="m-card__top"><span class="m-check"></span><b>#2046</b><span class="chip chip--green">Delivered</span><time>7:10 PM</time></div>
+                    <div class="m-tags"><span class="chip chip--green">Fully paid</span><span class="chip chip--gray">Store</span><span class="m-by"><svg class="av av--xs" viewBox="20 12 80 80"><use href="#av-tanvir" width="120" height="120"/></svg>by Tanvir</span></div>
+                    <div class="m-name">Imran Hossain</div>
+                    <div class="m-line"><span class="m-thumb m-thumb--navy"></span><div><b>Oxford Shirt</b><small>OXF-12-L</small></div><span class="m-qty">2 × <em>L</em></span><span class="m-price">BDT 2,200</span></div>
+                    <div class="m-total"><div><small>Total bill</small><b>BDT 3,150.00</b></div></div>
+                  </article>
+                </div>
+                <div class="m-cutoff"><span>Delivery confirm time 6:30 PM</span></div>
+              </div>
+            </div>
+
+            <div class="mp-cursor mp-cursor--a" data-cursor="nabila">
+              <svg class="mp-cursor__arrow" viewBox="0 0 16 16"><path d="M1.5 1.5l5 13 1.9-5.4 5.4-1.9z"/></svg>
+              <span class="mp-cursor__tag"><svg class="av av--xs" viewBox="20 12 80 80"><use href="#av-nabila" width="120" height="120"/></svg>Nabila</span>
+              <span class="mp-cursor__ripple"></span>
+            </div>
+            <div class="mp-cursor mp-cursor--b" data-cursor="tanvir">
+              <svg class="mp-cursor__arrow" viewBox="0 0 16 16"><path d="M1.5 1.5l5 13 1.9-5.4 5.4-1.9z"/></svg>
+              <span class="mp-cursor__tag"><svg class="av av--xs" viewBox="20 12 80 80"><use href="#av-tanvir" width="120" height="120"/></svg>Tanvir</span>
+              <span class="mp-cursor__ripple"></span>
+            </div>
+          </div>
+
+          <div class="stage__bubble float" aria-hidden="true" style="--float:-1.5s">
+            <svg class="av av-bob" viewBox="20 12 80 80"><use href="#av-ayesha" width="120" height="120"/></svg>
+            <span><b>Ayesha</b> is restocking OXF-12</span>
+            <span class="typing"><i></i><i></i><i></i></span>
+          </div>
+          <div class="stage__check float" aria-hidden="true" style="--float:-3s">
+            <svg class="icon"><use href="#i-shield"/></svg>
+            <span>Fraud Check · <b>94% delivered</b></span>
+          </div>
+          <div class="toasts" aria-hidden="true" data-toasts></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Activity ticker -->
+  <section class="ticker" aria-label="A day on PrimeOMS (illustrative activity)">
+    <div class="marquee">
+      <div class="marquee__track" data-ticker>
+        <ul class="ticker__list">
+          <li><svg class="av" viewBox="20 12 80 80" aria-hidden="true"><use href="#av-nabila" width="120" height="120"/></svg><span><b>Nabila</b> confirmed order <em>#2051</em></span><time>9:41 AM</time></li>
+          <li><svg class="av" viewBox="20 12 80 80" aria-hidden="true"><use href="#av-ayesha" width="120" height="120"/></svg><span><b>Ayesha</b> restocked OXF-12-M <em class="up">+20</em></span><time>10:12 AM</time></li>
+          <li><svg class="av" viewBox="20 12 80 80" aria-hidden="true"><use href="#av-sadia" width="120" height="120"/></svg><span><b>Sadia</b> ordered on Facebook <em>#2048</em></span><time>10:30 AM</time></li>
+          <li><span class="ticker__icon"><svg class="icon" aria-hidden="true"><use href="#i-truck"/></svg></span><span><b>Pathao</b> picked up 12 parcels</span><time>1:05 PM</time></li>
+          <li><svg class="av" viewBox="20 12 80 80" aria-hidden="true"><use href="#av-rafi" width="120" height="120"/></svg><span><b>Rafi</b> created draft <em>D-121</em></span><time>2:18 PM</time></li>
+          <li><svg class="av" viewBox="20 12 80 80" aria-hidden="true"><use href="#av-nabila" width="120" height="120"/></svg><span><b>Nabila</b> ran Fraud Check · <em class="up">94% delivered</em></span><time>3:02 PM</time></li>
+          <li><svg class="av" viewBox="20 12 80 80" aria-hidden="true"><use href="#av-tanvir" width="120" height="120"/></svg><span><b>Tanvir</b> gave Rafi access to Fraud Check</span><time>5:40 PM</time></li>
+          <li><svg class="av" viewBox="20 12 80 80" aria-hidden="true"><use href="#av-ayesha" width="120" height="120"/></svg><span><b>Ayesha</b> approved exchange <em>#EX-31</em></span><time>6:12 PM</time></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works: storyboard -->
+  <section class="tile tile--parchment story" id="how" data-scene="story">
+    <div class="container container--wide">
+      <header class="sh sh--left">
+        <p class="eyebrow">How it works</p>
+        <h2 class="h-section">From message to doorstep.</h2>
+        <p class="lead">Follow one order through PrimeOMS — from a Messenger chat to a checked, confirmed, tracked delivery.</p>
+      </header>
+
+      <ol class="story__track" data-story>
+        <li class="story__step" data-step="1">
+          <div class="story__panel chat" aria-hidden="true">
+            <div class="chat__head">
+              <svg class="av av--md" viewBox="20 12 80 80"><use href="#av-sadia" width="120" height="120"/></svg>
+              <div><b>Sadia Rahman</b><small>Messenger · Active now</small></div>
+            </div>
+            <div class="chat__body">
+              <p class="msg msg--in" data-msg>Hi! Is the Oxford shirt available in M?</p>
+              <p class="msg msg--out" data-msg>Yes — 18 left in M. Shall I place the order?</p>
+              <p class="msg msg--in" data-msg>Yes please, 2 pieces. Agrabad, Chattogram.</p>
+              <p class="msg msg--out" data-msg>Done! Your order is being prepared.</p>
+              <p class="msg msg--typing" data-typing><span class="typing"><i></i><i></i><i></i></span></p>
+            </div>
+            <div class="chat__foot">
+              <svg class="av av--xs" viewBox="20 12 80 80"><use href="#av-nabila" width="120" height="120"/></svg>
+              Replying as <b>Nabila</b>
+            </div>
+          </div>
+          <div class="story__label"><span class="story__num">1</span><div><b>Take the order</b><small>Nabila turns the chat into a draft.</small></div></div>
+        </li>
+
+        <li class="story__step" data-step="2">
+          <div class="story__panel pdraft" aria-hidden="true">
+            <div class="pdraft__head"><b>Draft D-118</b><span class="chip chip--amber" data-draft-status>Draft</span></div>
+            <div class="pdraft__who"><svg class="av av--xs" viewBox="20 12 80 80"><use href="#av-sadia" width="120" height="120"/></svg>Sadia Rahman · Agrabad, Chattogram</div>
+            <div class="m-line pdraft__line" data-draft-line><span class="m-thumb m-thumb--navy"></span><div><b>Oxford Shirt</b><small>OXF-12-M</small></div><span class="m-qty">2 × <em>M</em></span><span class="m-price">BDT 2,400</span></div>
+            <div class="pdraft__row" data-draft-ship><span>Delivery · Buy 2+</span><span class="pdraft__free">Free</span></div>
+            <div class="pdraft__check" data-draft-check>
+              <span class="pdraft__scan"></span>
+              <svg class="icon"><use href="#i-shield"/></svg>
+              <span>Fraud Check</span><b data-draft-rate>—</b>
+            </div>
+            <div class="pdraft__total"><span>Total</span><b>BDT 2,400</b></div>
+            <span class="m-btn pdraft__btn" data-draft-btn>Finalize order</span>
+          </div>
+          <div class="story__label"><span class="story__num">2</span><div><b>Check, then confirm</b><small>Fraud Check runs before it’s final.</small></div></div>
+        </li>
+
+        <li class="story__step" data-step="3">
+          <div class="story__panel pship" aria-hidden="true">
+            <div class="pdraft__head"><b>#2048</b><span class="chip chip--blue" data-ship-status>Sent to Pathao</span></div>
+            <div class="pship__road"><i class="pship__fill" data-ship-fill></i><span class="pship__truck" data-truck><svg class="icon"><use href="#i-truck"/></svg></span></div>
+            <ol class="pship__steps" data-ship-steps>
+              <li>Picked up</li>
+              <li>Sorting hub</li>
+              <li>In transit</li>
+              <li>Delivered</li>
+            </ol>
+            <div class="pship__done" data-ship-done>
+              <svg class="av av--md av-bob" viewBox="20 12 80 80"><use href="#av-sadia" width="120" height="120"/></svg>
+              <span><b>Delivered to Sadia</b><small>Status arrived via Pathao webhook</small></span>
+            </div>
+            <div class="confetti" data-confetti></div>
+          </div>
+          <div class="story__label"><span class="story__num">3</span><div><b>Ship and track</b><small>Status flows back on its own.</small></div></div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- Orders: live board -->
+  <section class="tile tile--dark orders2" id="orders" data-scene="orders">
+    <div class="orders2__inner">
+      <div class="orders2__copy">
+        <p class="eyebrow">Orders</p>
+        <h2 class="h-section">Built for the way you actually sell.</h2>
+        <p class="lead">Every order lands on one board — tagged with its channel, its payment, and the teammate who made it.</p>
+        <ul class="feat-list">
+          <li><svg class="icon" aria-hidden="true"><use href="#i-search"/></svg><div><b>One board for everything.</b><span>Filter by status, platform, moderator or date. Search by order, phone, name or email.</span></div></li>
+          <li><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg><div><b>A cutoff you can see.</b><span>Today’s courier confirm time, always in view.</span></div></li>
+          <li><svg class="icon" aria-hidden="true"><use href="#i-report"/></svg><div><b>Reports on demand.</b><span>Daily, monthly and yearly summaries, ready to download.</span></div></li>
+        </ul>
+      </div>
+
+      <div class="board" role="img" aria-label="Order board with New, Confirmed, Shipped and Delivered columns; order cards move from column to column, each showing the teammate who created it.">
+        <div class="board__bar" aria-hidden="true">
+          <span class="board__title">Order board</span>
+          <span class="board__cutoff"><svg class="icon"><use href="#i-clock"/></svg>Courier cutoff in <b data-countdown>1:12:40</b></span>
+        </div>
+        <div class="board__cols" data-board aria-hidden="true">
+          <div class="board__col" data-col="0">
+            <p class="board__head"><i class="dot"></i>New<em data-colcount>2</em></p>
+            <div class="board__list">
+              <article class="bcard"><div class="bcard__top"><b>#2054</b><span>BDT 890</span></div><div class="bcard__meta"><span class="chip chip--gray">Facebook</span><svg class="av av--xs" viewBox="20 12 80 80"><use href="#av-rafi" width="120" height="120"/></svg></div></article>
+              <article class="bcard"><div class="bcard__top"><b>#2053</b><span>BDT 2,150</span></div><div class="bcard__meta"><span class="chip chip--gray">Store</span><svg class="av av--xs" viewBox="20 12 80 80"><use href="#av-nabila" width="120" height="120"/></svg></div></article>
+            </div>
+          </div>
+          <div class="board__col" data-col="1">
+            <p class="board__head"><i class="dot dot--amber"></i>Confirmed<em data-colcount>2</em></p>
+            <div class="board__list">
+              <article class="bcard"><div class="bcard__top"><b>#2052</b><span>BDT 1,450</span></div><div class="bcard__meta"><span class="chip chip--gray">Facebook</span><svg class="av av--xs" viewBox="20 12 80 80"><use href="#av-ayesha" width="120" height="120"/></svg></div></article>
+              <article class="bcard"><div class="bcard__top"><b>#2051</b><span>BDT 3,200</span></div><div class="bcard__meta"><span class="chip chip--gray">Facebook</span><svg class="av av--xs" viewBox="20 12 80 80"><use href="#av-nabila" width="120" height="120"/></svg></div></article>
+            </div>
+          </div>
+          <div class="board__col" data-col="2">
+            <p class="board__head"><i class="dot dot--blue"></i>Shipped<em data-colcount>1</em></p>
+            <div class="board__list">
+              <article class="bcard"><div class="bcard__top"><b>#2050</b><span>BDT 1,100</span></div><div class="bcard__meta"><span class="chip chip--blue">Pathao</span><svg class="av av--xs" viewBox="20 12 80 80"><use href="#av-tanvir" width="120" height="120"/></svg></div></article>
+            </div>
+          </div>
+          <div class="board__col" data-col="3">
+            <p class="board__head"><i class="dot dot--green"></i>Delivered<em data-colcount>2</em></p>
+            <div class="board__list">
+              <article class="bcard"><div class="bcard__top"><b>#2049</b><span>BDT 2,750</span></div><div class="bcard__meta"><span class="chip chip--green">Paid</span><svg class="av av--xs" viewBox="20 12 80 80"><use href="#av-nabila" width="120" height="120"/></svg></div></article>
+              <article class="bcard"><div class="bcard__top"><b>#2048</b><span>BDT 2,400</span></div><div class="bcard__meta"><span class="chip chip--green">Paid</span><svg class="av av--xs" viewBox="20 12 80 80"><use href="#av-ayesha" width="120" height="120"/></svg></div></article>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Fraud Check: animated scan -->
+  <section class="tile tile--light fraud2" id="fraud-check" data-scene="fraud">
+    <div class="container container--wide fraud2__inner">
+      <div class="fscan" role="img" aria-label="Fraud Check demo: one phone number shows a 94 percent delivery record and is safe to confirm; another shows 38 percent and is flagged as risky.">
+        <div class="fscan__who float" aria-hidden="true">
+          <svg class="av av--md" viewBox="20 12 80 80"><use href="#av-nabila" width="120" height="120"/></svg>
+          <span><b>Nabila</b> is checking a number</span>
+          <span class="typing"><i></i><i></i><i></i></span>
+        </div>
+        <div class="window" aria-hidden="true">
+          <div class="window__bar"><span class="window__dots"><i></i><i></i><i></i></span><span class="window__url">Fraud Check</span></div>
+          <div class="fraud" data-fraud>
+            <b class="app__title">Fraud Check</b>
+            <small class="fraud__sub">Look up a phone number’s courier delivery history before confirming an order.</small>
+            <div class="fraud__search"><div class="m-input m-input--focus"><span data-fphone></span><span class="caret"></span></div><span class="m-btn" data-fbtn>Detect fraud</span></div>
+            <div class="fraud__result">
+              <span class="fraud__beam"></span>
+              <svg class="ring" viewBox="0 0 84 84">
+                <circle cx="42" cy="42" r="34" class="ring__track"/>
+                <circle cx="42" cy="42" r="34" class="ring__value" data-fring stroke-dasharray="0 213.6" transform="rotate(-90 42 42)"/>
+                <text x="42" y="41" class="ring__num" data-fpct>0%</text>
+                <text x="42" y="54" class="ring__cap">delivered</text>
+              </svg>
+              <div class="fraud__stats">
+                <div><small>Total parcels</small><b data-ftotal>0</b></div>
+                <div><small>Delivered</small><b data-fdel>0</b></div>
+                <div><small>Returned</small><b data-fret>0</b></div>
+              </div>
+            </div>
+            <div class="fraud__verdict" data-fverdict><svg class="icon"><use href="#i-check"/></svg><span data-fverdict-text>Good delivery record — safe to confirm</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="fraud2__copy">
+        <p class="eyebrow">Fraud Check</p>
+        <h2 class="h-section">Know before<br>you ship.</h2>
+        <p class="lead">Enter a phone number and see that customer’s courier delivery history before you confirm. Fake orders and repeat returners stop at your desk — not at the doorstep.</p>
+        <div class="verdicts">
+          <span class="verdict verdict--good"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Good record — confirm</span>
+          <span class="verdict verdict--risk"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg>Risky — call first</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Couriers: live route -->
+  <section class="tile tile--dark couriers2" id="couriers" data-scene="route">
+    <div class="container container--wide">
+      <header class="sh sh--split">
+        <div>
+          <p class="eyebrow">Couriers &amp; payments</p>
+          <h2 class="h-section">Pathao. Steadfast. Carrybee.<br>Built in.</h2>
+        </div>
+        <p class="lead">Choose your main delivery partner and send an order with one tap. Status comes back on its own — picked up, at the sorting hub, in transit, delivered.</p>
+      </header>
+
+      <div class="route" role="img" aria-label="Order 2048 travels from the store in Dhaka through pickup, the sorting hub and transit to Sadia in Chattogram, with each status arriving by courier webhook.">
+        <div class="route__canvas" aria-hidden="true" data-route>
+          <svg class="route__svg" viewBox="0 0 1000 260">
+            <path class="route__base" d="M70 180C210 180 230 70 370 80S560 200 690 160 870 60 930 96"/>
+            <path class="route__progress" data-route-path d="M70 180C210 180 230 70 370 80S560 200 690 160 870 60 930 96"/>
+          </svg>
+          <div class="route__stop" data-at="0" data-label="Packed"><span class="route__dot"></span><span class="route__label">Store · Dhaka</span></div>
+          <div class="route__stop" data-at="0.3" data-label="Picked up"><span class="route__dot"></span><span class="route__label">Picked up</span></div>
+          <div class="route__stop" data-at="0.55" data-label="At the sorting hub"><span class="route__dot"></span><span class="route__label">Sorting hub</span></div>
+          <div class="route__stop" data-at="0.78" data-label="In transit"><span class="route__dot"></span><span class="route__label">In transit</span></div>
+          <div class="route__stop" data-at="1" data-label="Delivered"><span class="route__dot"></span><span class="route__label">Chattogram</span></div>
+          <div class="route__pin route__pin--start" data-pin="0">
+            <svg class="av av--lg" viewBox="20 12 80 80"><use href="#av-ayesha" width="120" height="120"/></svg>
+            <span>Packed by <b>Ayesha</b></span>
+          </div>
+          <div class="route__pin route__pin--end" data-pin="1">
+            <svg class="av av--lg av-bob" viewBox="20 12 80 80"><use href="#av-sadia" width="120" height="120"/></svg>
+            <span><b>Sadia</b> · waiting</span>
+          </div>
+          <div class="route__truck" data-truck-r><svg class="icon"><use href="#i-truck"/></svg></div>
+        </div>
+
+        <div class="route__foot" aria-hidden="true">
+          <div class="cchips">
+            <span class="cchip is-main"><svg class="icon"><use href="#i-truck"/></svg>Pathao<em>Main</em></span>
+            <span class="cchip"><svg class="icon"><use href="#i-truck"/></svg>Steadfast</span>
+            <span class="cchip"><svg class="icon"><use href="#i-truck"/></svg>Carrybee</span>
+            <span class="cchip"><svg class="icon"><use href="#i-wallet"/></svg>bKash</span>
+          </div>
+          <div class="hook"><span class="live-dot"></span>Webhook · <b data-route-status>Packed</b><span class="hook__order">#2048</span></div>
+        </div>
+      </div>
+
+      <div class="points points--row">
+        <div class="point reveal"><svg class="icon point__icon" aria-hidden="true"><use href="#i-truck"/></svg><h3>Live tracking.</h3><p>Courier webhooks update every order automatically. No more checking three portals.</p></div>
+        <div class="point reveal"><svg class="icon point__icon" aria-hidden="true"><use href="#i-flask"/></svg><h3>Sandbox first.</h3><p>Test each integration in sandbox, then switch to production when you’re ready.</p></div>
+        <div class="point reveal"><svg class="icon point__icon" aria-hidden="true"><use href="#i-wallet"/></svg><h3>bKash, connected.</h3><p>Take bKash payments alongside cash on delivery, and see what’s paid on every order.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Inventory: living stock -->
+  <section class="tile tile--parchment inv2" id="inventory" data-scene="inventory">
+    <div class="container container--wide inv2__inner">
+      <div class="inv2__copy">
+        <p class="eyebrow">Inventory</p>
+        <h2 class="h-section">Stock that<br>keeps count.</h2>
+        <p class="lead">Every size of every product, tracked to the unit. See what’s running low, who restocked it, and every movement behind each number.</p>
+        <div class="inv2__kpis" aria-hidden="true">
+          <div><b data-count-to="2480">0</b><small>Available</small></div>
+          <div><b data-count-to="132">0</b><small>In stock</small></div>
+          <div class="is-warn"><b data-count-to="9">0</b><small>Low</small></div>
+          <div class="is-bad"><b data-count-to="4">0</b><small>Out</small></div>
+        </div>
+      </div>
+
+      <div class="inv2__stage" role="img" aria-label="Oxford Shirt stock by size. Size L runs low at 3 units, Ayesha restocks 20, and an order takes one unit of size M.">
+        <div class="pcard" aria-hidden="true">
+          <div class="pcard__head">
+            <span class="pcard__photo"><svg class="icon"><use href="#i-shirt"/></svg></span>
+            <div><b>Oxford Shirt</b><small>OXF-12 · 4 variants</small></div>
+            <span class="m-price"><s>BDT 1,450</s> BDT 1,200</span>
+          </div>
+          <div class="pcard__sizes">
+            <div class="size" data-size="M"><small>M</small><b><span data-qty>18</span><em>/24</em></b><i style="--p:75%"></i></div>
+            <div class="size is-low" data-size="L"><small>L</small><b><span data-qty>3</span><em>/24</em></b><i style="--p:12%"></i></div>
+            <div class="size" data-size="XL"><small>XL</small><b><span data-qty>14</span><em>/24</em></b><i style="--p:58%"></i></div>
+            <div class="size" data-size="XXL"><small>XXL</small><b><span data-qty>11</span><em>/12</em></b><i style="--p:92%"></i></div>
+          </div>
+        </div>
+        <div class="itoasts" aria-hidden="true">
+          <div class="itoast itoast--low" data-itoast="low"><span class="itoast__pulse"></span><span><b>Low stock</b> · OXF-12-L · 3 left</span></div>
+          <div class="itoast" data-itoast="restock"><svg class="av av--md" viewBox="20 12 80 80"><use href="#av-ayesha" width="120" height="120"/></svg><span><b>Ayesha</b> restocked OXF-12-L</span><em class="up">+20</em></div>
+          <div class="itoast" data-itoast="order"><svg class="av av--md" viewBox="20 12 80 80"><use href="#av-nabila" width="120" height="120"/></svg><span><b>Nabila</b> · Order #2055 · OXF-12-M</span><em class="down">−1</em></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Dashboard: bento -->
+  <section class="tile tile--dark dash2" id="dashboard" data-scene="dash">
+    <div class="container container--wide">
+      <header class="sh sh--split">
+        <div>
+          <p class="eyebrow">Dashboard</p>
+          <h2 class="h-section">Your whole business.<br>At a glance.</h2>
+        </div>
+        <p class="lead">Revenue, returns, exchanges and average order value for the last 30 days. Thirteen weeks of activity. And a short list of what needs you right now.</p>
+      </header>
+
+      <div class="bento" role="img" aria-label="Dashboard cards: 30-day revenue of BDT 412,800 rising 12 percent, a 13-week order activity heatmap, a moderator leaderboard, items needing attention, payment method shares, and average order, returns, exchanges and customer totals.">
+        <div class="bcell bcell--rev" aria-hidden="true">
+          <small>Revenue · 30D</small>
+          <b class="bcell__big">BDT <span data-count-to="412800">0</span></b>
+          <span class="m-delta">▲ 12% vs previous 30 days</span>
+          <svg class="spark" viewBox="-4 0 300 84" preserveAspectRatio="none">
+            <line x1="0" y1="20" x2="290" y2="20" class="spark__grid"/>
+            <line x1="0" y1="48" x2="290" y2="48" class="spark__grid"/>
+            <line x1="0" y1="76" x2="290" y2="76" class="spark__base"/>
+            <polyline class="spark__line" points="0,72.4 10,65.2 20,68.8 30,54.4 40,61.6 50,58 60,47.2 70,61.6 80,65.2 90,50.8 100,43.6 110,54.4 120,58 130,40 140,47.2 150,50.8 160,36.4 170,29.2 180,43.6 190,47.2 200,32.8 210,40 220,25.6 230,36.4 240,43.6 250,22 260,29.2 270,18.4 280,25.6 290,11.2"/>
+            <circle class="spark__dot" cx="290" cy="11.2" r="3.5"/>
+          </svg>
+        </div>
+        <div class="bcell bcell--heat" aria-hidden="true">
+          <small>Order activity · 13 weeks</small>
+          <b class="bcell__mid"><span data-count-to="1118">0</span> orders</b>
+          <div class="heat" data-heatmap></div>
+          <div class="heat__legend"><span>Less</span><i class="heat__c heat__c--0"></i><i class="heat__c heat__c--1"></i><i class="heat__c heat__c--2"></i><i class="heat__c heat__c--3"></i><i class="heat__c heat__c--4"></i><span>More</span></div>
+        </div>
+        <div class="bcell bcell--lead" aria-hidden="true">
+          <small>Top moderators · 30D</small>
+          <ul class="leader">
+            <li><svg class="av" viewBox="20 12 80 80"><use href="#av-nabila" width="120" height="120"/></svg><span>Nabila</span><i style="--p:100%"></i><b>142</b></li>
+            <li><svg class="av" viewBox="20 12 80 80"><use href="#av-ayesha" width="120" height="120"/></svg><span>Ayesha</span><i style="--p:83%"></i><b>118</b></li>
+            <li><svg class="av" viewBox="20 12 80 80"><use href="#av-tanvir" width="120" height="120"/></svg><span>Tanvir</span><i style="--p:68%"></i><b>96</b></li>
+            <li><svg class="av" viewBox="20 12 80 80"><use href="#av-rafi" width="120" height="120"/></svg><span>Rafi</span><i style="--p:22%"></i><b>31</b></li>
+          </ul>
+        </div>
+        <div class="bcell bcell--attn" aria-hidden="true">
+          <small>Needs attention</small>
+          <div class="attn"><span><i class="attn__pulse"></i>Awaiting confirmation</span><b>7</b></div>
+          <div class="attn"><span>Payment not collected</span><b>3</b></div>
+          <div class="attn"><span>Exchange requests</span><b>2</b></div>
+        </div>
+        <div class="bcell bcell--pay" aria-hidden="true">
+          <small>Payment method</small>
+          <div class="share"><span>Cash on delivery</span><i style="--p:72%"></i><b>72%</b></div>
+          <div class="share"><span>bKash</span><i style="--p:21%"></i><b>21%</b></div>
+          <div class="share"><span>Card</span><i style="--p:7%"></i><b>7%</b></div>
+        </div>
+        <div class="bcell bcell--kpis" aria-hidden="true">
+          <small class="bcell__label">Last 30 days</small>
+          <div><small>Avg order</small><b>BDT <span data-count-to="1069">0</span></b></div>
+          <div><small>Returns</small><b data-count-to="11">0</b></div>
+          <div><small>Exchanges</small><b data-count-to="6">0</b></div>
+          <div><small>Customers</small><b data-count-to="1240">0</b></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team: orbit + permissions + live log -->
+  <section class="tile tile--light team2" id="team" data-scene="team">
+    <div class="container container--wide team2__inner">
+      <div class="orbit" data-orbit>
+        <span class="orbit__ring orbit__ring--1" aria-hidden="true"></span>
+        <span class="orbit__ring orbit__ring--2" aria-hidden="true"></span>
+        <div class="orbit__hub" aria-hidden="true"><img src="assets/primeoms-logo.png" alt="" width="48" height="57"></div>
+        <div class="orbit__spin">
+          <button class="orbit__item" type="button" style="--a:-90deg" data-person="nabila" aria-pressed="true"><span class="orbit__inner"><svg class="av av--xl" viewBox="20 12 80 80" aria-hidden="true"><use href="#av-nabila" width="120" height="120"/></svg><span class="orbit__name">Nabila<small>Moderator</small></span></span></button>
+          <button class="orbit__item" type="button" style="--a:0deg" data-person="tanvir" aria-pressed="false"><span class="orbit__inner"><svg class="av av--xl" viewBox="20 12 80 80" aria-hidden="true"><use href="#av-tanvir" width="120" height="120"/></svg><span class="orbit__name">Tanvir<small>Store owner</small></span></span></button>
+          <button class="orbit__item" type="button" style="--a:90deg" data-person="ayesha" aria-pressed="false"><span class="orbit__inner"><svg class="av av--xl" viewBox="20 12 80 80" aria-hidden="true"><use href="#av-ayesha" width="120" height="120"/></svg><span class="orbit__name">Ayesha<small>Operations</small></span></span></button>
+          <button class="orbit__item" type="button" style="--a:180deg" data-person="rafi" aria-pressed="false"><span class="orbit__inner"><svg class="av av--xl" viewBox="20 12 80 80" aria-hidden="true"><use href="#av-rafi" width="120" height="120"/></svg><span class="orbit__name">Rafi<small>Invited</small></span></span></button>
+        </div>
+      </div>
+
+      <div class="team2__copy">
+        <p class="eyebrow">Team</p>
+        <h2 class="h-section">Your team,<br>with guardrails.</h2>
+        <p class="lead">Give each teammate exactly the features they need. Tap someone in the circle to see their access.</p>
+
+        <div class="perm-card" aria-live="polite">
+          <div class="perm-card__head">
+            <svg class="av av--lg" viewBox="20 12 80 80" aria-hidden="true"><use data-perm-av href="#av-nabila" width="120" height="120"/></svg>
+            <div><b data-perm-name>Nabila</b><small data-perm-role>Moderator · 14 features</small></div>
+          </div>
+          <ul class="perm-card__grid" data-perm-grid></ul>
+        </div>
+
+        <div class="feed" aria-hidden="true">
+          <p class="feed__title"><span class="live-dot"></span>Activity log</p>
+          <ul class="feed__list" data-feed></ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Everything else -->
+  <section class="tile tile--parchment" id="features" data-scene="features">
+    <div class="container container--wide">
+      <header class="sh sh--split">
+        <div>
+          <p class="eyebrow">And everything else</p>
+          <h2 class="h-section">Everything your store runs on.</h2>
+        </div>
+        <p class="lead">Catalog, promotions, exchanges, emails, invoices and your storefront — in the same calm admin.</p>
+      </header>
+      <ul class="grid feat-grid">
+        <li class="card reveal"><span class="card__tile"><svg class="icon"><use href="#i-layers"/></svg></span><h3 class="card__title">Catalog &amp; combos</h3><p class="card__text">Products, combos, categories, and collections — with sizes and SKUs for every variant.</p></li>
+        <li class="card reveal"><span class="card__tile"><svg class="icon"><use href="#i-percent"/></svg></span><h3 class="card__title">Promotions &amp; codes</h3><p class="card__text">Multibuy offers like “Buy 2, get free delivery,” plus discount codes for every campaign.</p></li>
+        <li class="card reveal"><span class="card__tile"><svg class="icon"><use href="#i-exchange"/></svg></span><h3 class="card__title">Exchanges</h3><p class="card__text">Customers request exchanges within a window you set. Track each one to the end.</p></li>
+        <li class="card reveal"><span class="card__tile"><svg class="icon"><use href="#i-star"/></svg></span><h3 class="card__title">Reviews &amp; feedback</h3><p class="card__text">Moderate product reviews and read customer feedback in one place.</p></li>
+        <li class="card reveal"><span class="card__tile"><svg class="icon"><use href="#i-chat"/></svg></span><h3 class="card__title">Product requests</h3><p class="card__text">See which products your customers are asking you to stock next.</p></li>
+        <li class="card reveal"><span class="card__tile"><svg class="icon"><use href="#i-mail"/></svg></span><h3 class="card__title">Offer &amp; delivery emails</h3><p class="card__text">Send a promotion to every active customer, and keep buyers posted on delivery.</p></li>
+        <li class="card reveal"><span class="card__tile"><svg class="icon"><use href="#i-doc"/></svg></span><h3 class="card__title">Invoices</h3><p class="card__text">PDF invoices and invoice emails, carrying your own offer note and message.</p></li>
+        <li class="card reveal"><span class="card__tile"><svg class="icon"><use href="#i-store"/></svg></span><h3 class="card__title">Your storefront</h3><p class="card__text">Branding, pages, FAQ, contacts, delivery rules, and a scrolling notification bar.</p></li>
+        <li class="card reveal"><span class="card__tile"><svg class="icon"><use href="#i-trend"/></svg></span><h3 class="card__title">Visitor analytics</h3><p class="card__text">Visitors, page views, bounce rate, referrers, countries, devices, and browsers.</p></li>
+        <li class="card reveal"><span class="card__tile"><svg class="icon"><use href="#i-target"/></svg></span><h3 class="card__title">Meta Pixel</h3><p class="card__text">Track more than one ad account at once, on every page of your store.</p></li>
+        <li class="card reveal"><span class="card__tile"><svg class="icon"><use href="#i-users"/></svg></span><h3 class="card__title">Customers</h3><p class="card__text">Every buyer, their orders, and your top customers by revenue.</p></li>
+        <li class="card reveal"><span class="card__tile"><svg class="icon"><use href="#i-bell"/></svg></span><h3 class="card__title">Notifications</h3><p class="card__text">New orders and requests arrive as alerts — with sound, if you want it.</p></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- CTA with the cast -->
+  <section class="tile tile--dark-3 cta2" id="get-started" data-scene="cta">
+    <div class="container cta2__inner">
+      <h2 class="h-hero">Run your store<br>on PrimeOMS.</h2>
+      <p class="lead">See how it fits the way your team already sells.</p>
+      <div class="ctas">
+        <!-- TODO: replace with the real PrimeOMS contact address or booking link -->
+        <a class="btn btn--primary btn--lg" href="mailto:hello@primeoms.com?subject=PrimeOMS%20demo">Book a demo</a>
+        <a class="btn btn--ghost btn--lg" href="#features">Explore features</a>
+      </div>
+    </div>
+    <div class="cast" aria-hidden="true">
+      <div class="cast__person" style="--bob:-0.6s"><svg class="cast__av av-bob" viewBox="0 0 120 120"><use href="#av-rafi" width="120" height="120"/></svg></div>
+      <div class="cast__person" style="--bob:-2.1s"><svg class="cast__av av-bob" viewBox="0 0 120 120"><use href="#av-tanvir" width="120" height="120"/></svg></div>
+      <div class="cast__person cast__person--lead" style="--bob:-1.2s">
+        <span class="cast__bubble">See you inside!</span>
+        <svg class="cast__av av-bob" viewBox="0 0 120 120"><use href="#av-nabila" width="120" height="120"/></svg>
+        <svg class="cast__hand av-wave" viewBox="0 0 40 52"><use href="#av-hand" width="40" height="52"/></svg>
+      </div>
+      <div class="cast__person" style="--bob:-3.3s"><svg class="cast__av av-bob" viewBox="0 0 120 120"><use href="#av-ayesha" width="120" height="120"/></svg></div>
+      <div class="cast__person" style="--bob:-2.7s"><svg class="cast__av av-bob" viewBox="0 0 120 120"><use href="#av-sadia" width="120" height="120"/></svg></div>
+    </div>
+  </section>
+
+  <!-- "A day on PrimeOMS" scroll companion -->
+  <div class="now" data-now aria-hidden="true">
+    <svg class="av av--md" viewBox="20 12 80 80"><use data-now-av href="#av-nabila" width="120" height="120"/></svg>
+    <span class="now__text"><time data-now-time>9:00 AM</time><span data-now-msg>The store opens</span></span>
+    <span class="now__dial"><i data-now-hand></i></span>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="container container--wide">
+    <p class="footer__note">Courier integrations require your own merchant account with Pathao, Steadfast, or Carrybee. bKash payments require a bKash merchant account. Figures shown in product images are illustrative.</p>
+    <div class="footer__cols">
+      <div>
+        <h3>Product</h3>
+        <ul>
+          <li><a href="#orders">Orders &amp; drafts</a></li>
+          <li><a href="#fraud-check">Fraud Check</a></li>
+          <li><a href="#couriers">Couriers</a></li>
+          <li><a href="#inventory">Inventory</a></li>
+          <li><a href="#dashboard">Dashboard</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Operations</h3>
+        <ul>
+          <li><a href="#team">Team &amp; permissions</a></li>
+          <li><a href="#team">Activity log</a></li>
+          <li><a href="#features">Promotions &amp; codes</a></li>
+          <li><a href="#features">Exchanges</a></li>
+          <li><a href="#features">Offer emails</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Storefront</h3>
+        <ul>
+          <li><a href="#features">Catalog &amp; combos</a></li>
+          <li><a href="#features">Visitor analytics</a></li>
+          <li><a href="#features">Meta Pixel</a></li>
+          <li><a href="#features">Reviews &amp; feedback</a></li>
+          <li><a href="#features">Invoices</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Get started</h3>
+        <ul>
+          <li><a href="#get-started">Book a demo</a></li>
+          <li><a href="#how">How it works</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__legal">
+      <span>Copyright © <span data-year>2026</span> PrimeOMS. All rights reserved.</span>
+      <span>Built for online sellers in Bangladesh.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js" defer></script>
+<script src="js/scenes.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,184 @@
+/* ==========================================================================
+   PrimeOMS motion layer
+   Avatar life (blink, glance, bob, wave) + UI animation primitives.
+   Everything here switches off under prefers-reduced-motion.
+   ========================================================================== */
+
+/* ---- Avatar life -------------------------------------------------------- */
+
+/* Blink: eyes squash toward the lid. --blink staggers instances (set in JS). */
+.av-eyes {
+  transform-box: fill-box;
+  transform-origin: 50% 25%;
+  animation: av-blink 6.5s infinite;
+  animation-delay: var(--blink, 0s);
+}
+@keyframes av-blink {
+  0%, 93%, 100% { transform: scaleY(1); }
+  95% { transform: scaleY(0.08); }
+  97% { transform: scaleY(1); }
+}
+
+/* Glance: pupils + glints drift left, then right, then home. */
+.av-look {
+  animation: av-look 9s ease-in-out infinite;
+  animation-delay: var(--look, 0s);
+}
+@keyframes av-look {
+  0%, 36%, 100% { transform: translate(0, 0); }
+  42%, 56% { transform: translate(-0.7px, 0.1px); }
+  62%, 76% { transform: translate(0.7px, -0.1px); }
+  82% { transform: translate(0, 0); }
+}
+
+/* Idle bob for large avatars */
+.av-bob {
+  animation: av-bob 4.6s ease-in-out infinite;
+  animation-delay: var(--bob, 0s);
+}
+@keyframes av-bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+/* Wave: rotate around the wrist */
+.av-wave {
+  transform-origin: 50% 92%;
+  animation: av-wave 2.8s ease-in-out infinite;
+}
+@keyframes av-wave {
+  0%, 60%, 100% { transform: rotate(0deg); }
+  10% { transform: rotate(18deg); }
+  20% { transform: rotate(-10deg); }
+  30% { transform: rotate(16deg); }
+  40% { transform: rotate(-6deg); }
+  50% { transform: rotate(8deg); }
+}
+
+/* Hello: a quick bounce when an avatar first appears */
+.av-hello { animation: av-hello 0.7s cubic-bezier(0.3, 1.6, 0.5, 1) both; }
+@keyframes av-hello {
+  0% { transform: translateY(14px) scale(0.85); opacity: 0; }
+  100% { transform: none; opacity: 1; }
+}
+
+/* ---- UI primitives ------------------------------------------------------ */
+
+/* Live dot */
+.live-dot {
+  position: relative;
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--av-eye-deep);
+  flex: none;
+}
+.live-dot::after {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 2px solid var(--av-eye);
+  animation: ping 1.8s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+@keyframes ping {
+  0% { transform: scale(0.6); opacity: 1; }
+  80%, 100% { transform: scale(1.8); opacity: 0; }
+}
+
+/* Typing dots */
+.typing { display: inline-flex; gap: 3px; align-items: center; }
+.typing i {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.5;
+  animation: typing 1.2s ease-in-out infinite;
+}
+.typing i:nth-child(2) { animation-delay: 0.15s; }
+.typing i:nth-child(3) { animation-delay: 0.3s; }
+@keyframes typing {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+  30% { transform: translateY(-4px); opacity: 1; }
+}
+
+/* Marquee */
+.marquee__track {
+  display: flex;
+  width: max-content;
+  animation: marquee var(--marquee-dur, 60s) linear infinite;
+}
+.marquee:hover .marquee__track { animation-play-state: paused; }
+@keyframes marquee { to { transform: translateX(-50%); } }
+
+/* Gentle float for decorative chips */
+.float { animation: float 6s ease-in-out infinite; animation-delay: var(--float, 0s); }
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+/* Pop in (toasts, chips, chat bubbles) */
+@keyframes pop-in {
+  0% { opacity: 0; transform: translateY(10px) scale(0.92); }
+  100% { opacity: 1; transform: none; }
+}
+@keyframes pop-out {
+  to { opacity: 0; transform: translateY(-6px) scale(0.96); }
+}
+
+/* Attention pulse (low stock, needs attention) */
+@keyframes pulse-ring {
+  0% { box-shadow: 0 0 0 0 rgba(138, 90, 0, 0.35); }
+  70%, 100% { box-shadow: 0 0 0 8px rgba(138, 90, 0, 0); }
+}
+
+/* Click ripple (multiplayer cursors) */
+@keyframes ripple {
+  0% { transform: scale(0.3); opacity: 0.6; }
+  100% { transform: scale(2.4); opacity: 0; }
+}
+
+/* Count bump when a number changes */
+.bump { animation: bump 0.5s cubic-bezier(0.3, 1.6, 0.5, 1); }
+@keyframes bump {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.18); color: var(--primary); }
+  100% { transform: scale(1); }
+}
+
+/* Draw an SVG stroke (sparkline, route) */
+@keyframes draw { to { stroke-dashoffset: 0; } }
+
+/* Orbit */
+@keyframes orbit { to { transform: rotate(360deg); } }
+@keyframes orbit-counter { to { transform: rotate(-360deg); } }
+
+/* Truck along the route */
+@keyframes drive {
+  0% { offset-distance: 0%; }
+  85%, 100% { offset-distance: 100%; }
+}
+
+/* Shimmer for "scanning" states */
+@keyframes scan {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* ---- Reduced motion ----------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .av-eyes,
+  .av-look,
+  .av-bob,
+  .av-wave,
+  .av-hello,
+  .live-dot::after,
+  .typing i,
+  .marquee__track,
+  .float,
+  .bump { animation: none !important; }
+}
