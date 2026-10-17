@@ -893,15 +893,52 @@
     </div>
   </section>
 
+  <!-- Contact -->
+  <section class="tile tile--light contact" id="contact">
+    <div class="container">
+      <header class="sh">
+        <p class="eyebrow">Get in touch</p>
+        <h2 class="h-section">Talk to the PrimeOMS team.</h2>
+        <p class="lead">Questions, a demo request, or just want to say hi — send us a message.</p>
+      </header>
+      <div class="contact__wrap">
+        <form class="contact__form" action="https://formspree.io/f/mbdnzepe" method="POST">
+          <div class="contact__row">
+            <label class="contact__field">
+              <span class="contact__label">Name</span>
+              <input class="contact__input" type="text" name="name" autocomplete="name" required>
+            </label>
+            <label class="contact__field">
+              <span class="contact__label">Email</span>
+              <input class="contact__input" type="email" name="email" autocomplete="email" required>
+            </label>
+          </div>
+          <label class="contact__field">
+            <span class="contact__label">Phone number</span>
+            <input class="contact__input" type="tel" name="phone" autocomplete="tel" required>
+          </label>
+          <label class="contact__field">
+            <span class="contact__label">Message</span>
+            <textarea class="contact__input contact__input--area" name="message" rows="5" required></textarea>
+          </label>
+          <button class="btn btn--primary btn--lg" type="submit">Send message</button>
+        </form>
+        <div class="contact__info">
+          <p><svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg><a href="mailto:infectech@gmail.com">infectech@gmail.com</a></p>
+          <p><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg><a href="tel:+8801326561196">+880 1326-561196</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- CTA with the cast -->
   <section class="tile tile--dark-3 cta2" id="get-started" data-scene="cta">
     <div class="container cta2__inner">
       <h2 class="h-hero">Run your store<br>on PrimeOMS.</h2>
       <p class="lead">See how it fits the way your team already sells.</p>
       <div class="ctas">
-        <!-- TODO: replace with the real PrimeOMS contact address or booking link -->
-        <a class="btn btn--primary btn--lg" href="mailto:hello@primeoms.com?subject=PrimeOMS%20demo">Book a demo</a>
-        <a class="btn btn--ghost btn--lg" href="#features">Explore features</a>
+        <a class="btn btn--primary btn--lg" href="mailto:infectech@gmail.com?subject=PrimeOMS%20demo">Book a demo</a>
+        <a class="btn btn--ghost btn--lg" href="#contact">Contact us</a>
       </div>
     </div>
     <div class="cast" aria-hidden="true">
@@ -963,6 +1000,7 @@
         <h3>Get started</h3>
         <ul>
           <li><a href="#get-started">Book a demo</a></li>
+          <li><a href="#contact">Contact us</a></li>
           <li><a href="#how">How it works</a></li>
         </ul>
       </div>
