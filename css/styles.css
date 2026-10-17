@@ -785,6 +785,7 @@ html.is-locked { overflow: hidden; }
 .footer__legal {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   justify-content: space-between;
   gap: var(--s-xs) var(--s-lg);
   padding-top: var(--s-lg);
@@ -1525,6 +1526,38 @@ html.is-locked { overflow: hidden; }
 .contact__info .icon { font-size: 18px; color: var(--primary); flex-shrink: 0; }
 .contact__info a { color: inherit; }
 .contact__info a:hover { color: var(--primary); }
+
+.contact__social {
+  display: flex;
+  gap: var(--s-md);
+  padding-top: var(--s-sm);
+  border-top: 1px solid rgba(29, 29, 31, 0.1);
+}
+
+.contact__social a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  color: var(--ink-80);
+}
+
+.contact__social .icon { font-size: 18px; color: var(--ink-80); flex-shrink: 0; }
+.contact__social a:hover,
+.contact__social a:hover .icon { color: var(--ink); }
+
+.footer__social {
+  display: flex;
+  gap: var(--s-sm);
+}
+
+.footer__social a {
+  display: flex;
+  color: var(--ink-48);
+}
+
+.footer__social .icon { font-size: 18px; }
+.footer__social a:hover { color: var(--ink-80); }
 
 @media (max-width: 767px) {
   .contact__wrap { grid-template-columns: minmax(0, 1fr); }
