@@ -977,19 +977,35 @@
               <input class="contact__input" type="text" name="name" autocomplete="name" required>
             </label>
             <label class="contact__field">
+              <span class="contact__label">Company</span>
+              <input class="contact__input" type="text" name="company" autocomplete="organization">
+            </label>
+          </div>
+          <div class="contact__row">
+            <label class="contact__field">
               <span class="contact__label">Email</span>
               <input class="contact__input" type="email" name="email" autocomplete="email" required>
             </label>
+            <label class="contact__field">
+              <span class="contact__label">Phone number</span>
+              <input class="contact__input" type="tel" name="phone" autocomplete="tel" required>
+            </label>
           </div>
-          <label class="contact__field">
-            <span class="contact__label">Phone number</span>
-            <input class="contact__input" type="tel" name="phone" autocomplete="tel" required>
-          </label>
           <label class="contact__field">
             <span class="contact__label">Message</span>
             <textarea class="contact__input contact__input--area" name="message" rows="5" required></textarea>
           </label>
-          <button class="btn btn--primary btn--lg" type="submit">Send message</button>
+          <div class="contact__submit">
+            <button class="btn btn--primary btn--lg contact__send" type="submit">
+              <span class="contact__send-label">Send message</span>
+              <span class="contact__send-icon" aria-hidden="true">
+                <svg class="contact__plane" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+                <span class="contact__spinner"></span>
+                <svg class="contact__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 4 4L19 6"/></svg>
+              </span>
+            </button>
+            <p class="contact__status" role="status" aria-live="polite" aria-atomic="true"></p>
+          </div>
         </form>
         <div class="contact__info">
           <p><svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg><a href="mailto:hello@infec.tech">hello@infec.tech</a></p>

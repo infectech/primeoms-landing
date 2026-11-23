@@ -116,6 +116,62 @@
     heat.appendChild(frag);
   }
 
+  // Keep contact submission on-page so send feedback reflects the actual result.
+  const contactForm = document.querySelector('.contact__form');
+  if (contactForm && 'fetch' in window) {
+    const button = contactForm.querySelector('.contact__send');
+    const label = button.querySelector('.contact__send-label');
+    const status = contactForm.querySelector('.contact__status');
+    let sending = false;
+
+    contactForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      if (sending) return;
+      sending = true;
+      button.disabled = true;
+      button.dataset.state = 'sending';
+      label.textContent = 'Sending…';
+      status.dataset.state = 'sending';
+      status.textContent = 'Sending your message…';
+      contactForm.setAttribute('aria-busy', 'true');
+
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 20000);
+      try {
+        const response = await fetch(contactForm.action, {
+          method: 'POST',
+          body: new FormData(contactForm),
+          headers: { Accept: 'application/json' },
+          signal: controller.signal,
+        });
+        if (!response.ok) throw new Error('Message submission failed');
+        button.dataset.state = 'sent';
+        label.textContent = 'Message sent';
+        status.dataset.state = 'sent';
+        status.textContent = 'Thanks for reaching out! The PrimeOMS team will be in touch.';
+        contactForm.reset();
+      } catch (error) {
+        button.dataset.state = 'error';
+        label.textContent = 'Try again';
+        status.dataset.state = 'error';
+        status.textContent = 'Your message couldn’t be sent. Please try again or email hello@infec.tech.';
+      } finally {
+        clearTimeout(timeout);
+        sending = false;
+        button.disabled = false;
+        contactForm.removeAttribute('aria-busy');
+      }
+    });
+
+    contactForm.addEventListener('input', () => {
+      if (sending || button.dataset.state !== 'sent') return;
+      delete button.dataset.state;
+      label.textContent = 'Send message';
+      status.textContent = '';
+      delete status.dataset.state;
+    });
+  }
+
   // Footer year
   document.querySelectorAll('[data-year]').forEach((el) => {
     el.textContent = String(new Date().getFullYear());

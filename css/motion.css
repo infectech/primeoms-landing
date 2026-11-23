@@ -168,6 +168,32 @@
   100% { transform: translateX(100%); }
 }
 
+/* ---- Contact send ------------------------------------------------------- */
+
+.contact__send[data-state="sending"] .contact__plane {
+  animation: contact-send 0.55s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+.contact__send[data-state="sending"] .contact__spinner {
+  animation: orbit 0.8s linear infinite, contact-spinner-in 0.55s linear both;
+}
+.contact__send[data-state="sent"] .contact__check {
+  animation: pop-in 0.35s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+.contact__send[data-state="sent"] .contact__check path {
+  stroke-dasharray: 24;
+  stroke-dashoffset: 24;
+  animation: draw 0.4s ease-out forwards;
+}
+@keyframes contact-send {
+  0% { transform: none; opacity: 1; }
+  25% { transform: translate(-3px, 3px); opacity: 1; }
+  100% { transform: translate(32px, -32px); opacity: 0; }
+}
+@keyframes contact-spinner-in {
+  0%, 70% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
 /* ---- Reduced motion ----------------------------------------------------- */
 
 @media (prefers-reduced-motion: reduce) {
@@ -180,5 +206,10 @@
   .typing i,
   .marquee__track,
   .float,
-  .bump { animation: none !important; }
+  .bump,
+  .contact__plane,
+  .contact__spinner,
+  .contact__check,
+  .contact__check path { animation: none !important; }
+  .contact__check path { stroke-dashoffset: 0; }
 }
